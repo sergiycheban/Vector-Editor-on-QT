@@ -18,33 +18,49 @@ class MainWindow : public QMainWindow
 {
 	Q_OBJECT
 
+	Q_PROPERTY(QColor color READ color WRITE setColor NOTIFY colorChanged)
+	Q_PROPERTY(int borderWidth READ borderWidth WRITE setBorderWidth NOTIFY borderWidthChanged)
+
+
 public:
-	explicit MainWindow(QWidget *parent = 0);
+	explicit MainWindow(QWidget* parent = 0);
 	~MainWindow();
 
-	QColor lineColor() const;
-
-private slots:
-
-
+	QColor color() const;
+	int borderWidth() const;
 
 signals:
-	void lineColorChanged(const QColor &color);
-    void currentActionChanged(int);
+	void colorChanged( QColor &color);
+	void borderWidthChanged(const int &width);
+	void borderColorChanged(const QColor &color);
+
 
 public slots:
-    void setLineColor(const QColor &color);
+	void setColor(const QColor &color);
+	void setBorderWidth(const int &width);
+	void setBorderColor(const QColor &color);
+	void newRectangle(Rectangle* rect);
+	void loadRectangle(Rectangle* rect);
+	void setVisible(bool visible) override;
+	void deselect();
+    void selectNewItem(QGraphicsItem* item);
+    void selectItem(QGraphicsItem* item);
+
+
 
 private:
 	Ui::MainWindow*		ui;
 	QGraphicsScene*		scene;
-    QColor              m_color;
+	QColor				m_color;
+	int					m_borderWidth;
+	QColor				m_borderColor;
+
 	QGraphicsPathItem*	currentPolyline = nullptr;
 
-    WorkPlace* workplaceScene;
-    QString path;
+	WorkPlace*			workplaceScene;
+	QString				path;
+	Rectangle*			currentRectangle = nullptr;
 
-    int m_currentAction;
 };
 
 #endif // MAINWINDOW_H
