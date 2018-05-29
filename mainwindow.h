@@ -71,7 +71,6 @@ private slots:
 
 private:
     Ui::MainWindow*		m_ui;
-    DiagramItem*        myDiagramItem;
 	QGraphicsScene*		scene;
     QUndoStack*         undoStack;
 	QColor				m_color;

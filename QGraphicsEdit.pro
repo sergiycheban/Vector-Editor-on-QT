@@ -30,11 +30,9 @@ SOURCES += \
     rectangle.cpp \
     dotsignal.cpp \
     workplace.cpp \
-    diagramitem.cpp \
     line.cpp \
     svssave.cpp \
     colorlabel.cpp \
-    diagramitem.cpp \
     dotsignal.cpp \
     line.cpp \
     main.cpp \
@@ -49,11 +47,9 @@ HEADERS += \
     rectangle.h \
     dotsignal.h \
     workplace.h \
-    diagramitem.h \
     line.h \
     svssave.h \
     colorlabel.h \
-    diagramitem.h \
     dotsignal.h \
     line.h \
     mainwindow.h \
