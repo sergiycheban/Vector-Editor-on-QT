@@ -198,8 +198,6 @@ void Rectangle::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
     qreal dby = pt.y() - rect().top();
     qreal dty = pt.y() - rect().bottom();
 
-
-
     m_cornerFlags = 0;
     if( dby < 7 && dby > -7 ) m_cornerFlags |= Top;
     if( dty < 7 && dty > -7 ) m_cornerFlags |= Bottom;
@@ -207,7 +205,7 @@ void Rectangle::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
     if( dlx < 7 && dlx > -7 ) m_cornerFlags |= Left;
 
     if(m_actionFlags == ResizeState){
-        QPixmap p("D:/QWERTY/Resources/scale.svg");
+        QPixmap p(":/icon/Resources/cursor.svg");
         QPixmap pResult;
         QTransform trans = transform();
         switch (m_cornerFlags) {
@@ -244,7 +242,7 @@ void Rectangle::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
         case TopRight:
         case BottomLeft:
         case BottomRight: {
-            QPixmap p("D:/QWERTY/Resources/rotate.svg");
+            QPixmap p(":/icon/Resources/spiral.svg");
             setCursor(QCursor(p.scaled(24,24,Qt::KeepAspectRatio)));
             break;
         }

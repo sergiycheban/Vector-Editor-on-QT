@@ -9,18 +9,18 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>960</width>
+    <width>1200</width>
     <height>620</height>
    </rect>
   </property>
   <property name="maximumSize">
    <size>
-    <width>960</width>
+    <width>1200</width>
     <height>620</height>
    </size>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Graphic Editor</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <widget class="QGraphicsView" name="graphicsView">
@@ -28,8 +28,8 @@
      <rect>
       <x>95</x>
       <y>10</y>
-      <width>861</width>
-      <height>561</height>
+      <width>1091</width>
+      <height>571</height>
      </rect>
     </property>
    </widget>
@@ -46,103 +46,38 @@
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="m_square">
-    <property name="enabled">
-     <bool>true</bool>
-    </property>
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>12</x>
-      <y>13</y>
-      <width>75</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Square</string>
-    </property>
-    <property name="checkable">
-     <bool>false</bool>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="m_line">
-    <property name="geometry">
-     <rect>
-      <x>12</x>
-      <y>42</y>
-      <width>75</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Line</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="m_move">
-    <property name="geometry">
-     <rect>
-      <x>12</x>
-      <y>71</y>
-      <width>75</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Move</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="m_open">
-    <property name="geometry">
-     <rect>
-      <x>12</x>
-      <y>506</y>
-      <width>75</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Open</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="m_save">
-    <property name="geometry">
-     <rect>
-      <x>12</x>
-      <y>535</y>
-      <width>75</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Save</string>
-    </property>
-   </widget>
-   <widget class="QWidget" name="">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>100</y>
-      <width>81</width>
+      <x>0</x>
+      <y>150</y>
+      <width>91</width>
       <height>351</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_3">
      <item>
       <widget class="QWidget" name="widget_rect" native="true">
-       <widget class="QWidget" name="">
+       <widget class="QWidget" name="layoutWidget">
         <property name="geometry">
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>81</width>
-          <height>141</height>
+          <width>92</width>
+          <height>171</height>
          </rect>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_4">
          <item>
           <widget class="QLabel" name="label">
+           <property name="maximumSize">
+            <size>
+             <width>90</width>
+             <height>30</height>
+            </size>
+           </property>
            <property name="text">
-            <string>Rectangle color</string>
+            <string>Rect color</string>
            </property>
           </widget>
          </item>
@@ -150,8 +85,34 @@
           <widget class="ColorLabel" name="lineColor">
            <property name="maximumSize">
             <size>
-             <width>80</width>
+             <width>90</width>
+             <height>20</height>
+            </size>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_2">
+           <property name="maximumSize">
+            <size>
+             <width>90</width>
              <height>30</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>Border color</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="ColorLabel" name="borderColor">
+           <property name="maximumSize">
+            <size>
+             <width>90</width>
+             <height>20</height>
             </size>
            </property>
            <property name="text">
@@ -161,6 +122,12 @@
          </item>
          <item>
           <widget class="QLabel" name="label_4">
+           <property name="maximumSize">
+            <size>
+             <width>90</width>
+             <height>30</height>
+            </size>
+           </property>
            <property name="text">
             <string>Border width</string>
            </property>
@@ -173,7 +140,7 @@
           <widget class="QSpinBox" name="borderWidth">
            <property name="maximumSize">
             <size>
-             <width>80</width>
+             <width>90</width>
              <height>30</height>
             </size>
            </property>
@@ -189,24 +156,17 @@
           </widget>
          </item>
          <item>
-          <widget class="QLabel" name="label_2">
-           <property name="text">
-            <string>Border color</string>
+          <spacer name="verticalSpacer">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
            </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="ColorLabel" name="borderColor">
-           <property name="maximumSize">
+           <property name="sizeHint" stdset="0">
             <size>
-             <width>80</width>
-             <height>30</height>
+             <width>20</width>
+             <height>40</height>
             </size>
            </property>
-           <property name="text">
-            <string/>
-           </property>
-          </widget>
+          </spacer>
          </item>
         </layout>
        </widget>
@@ -214,12 +174,12 @@
      </item>
      <item>
       <widget class="QWidget" name="widget_line" native="true">
-       <widget class="QWidget" name="">
+       <widget class="QWidget" name="layoutWidget">
         <property name="geometry">
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>81</width>
+          <width>91</width>
           <height>111</height>
          </rect>
         </property>
@@ -228,7 +188,7 @@
           <widget class="QLabel" name="label_3">
            <property name="maximumSize">
             <size>
-             <width>75</width>
+             <width>90</width>
              <height>30</height>
             </size>
            </property>
@@ -241,7 +201,7 @@
           <widget class="ColorLabel" name="borderColor_3">
            <property name="maximumSize">
             <size>
-             <width>80</width>
+             <width>90</width>
              <height>20</height>
             </size>
            </property>
@@ -254,7 +214,7 @@
           <widget class="QLabel" name="label_5">
            <property name="maximumSize">
             <size>
-             <width>75</width>
+             <width>90</width>
              <height>30</height>
             </size>
            </property>
@@ -270,7 +230,7 @@
           <widget class="QSpinBox" name="borderWidth_2">
            <property name="maximumSize">
             <size>
-             <width>80</width>
+             <width>90</width>
              <height>30</height>
             </size>
            </property>
@@ -285,8 +245,78 @@
            </property>
           </widget>
          </item>
+         <item>
+          <spacer name="verticalSpacer_2">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>40</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
         </layout>
        </widget>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="layoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>10</y>
+      <width>91</width>
+      <height>131</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout_2">
+     <item>
+      <widget class="QPushButton" name="m_square">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>90</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Rect</string>
+       </property>
+       <property name="checkable">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="m_line">
+       <property name="maximumSize">
+        <size>
+         <width>90</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Line</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="m_move">
+       <property name="maximumSize">
+        <size>
+         <width>90</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Edit</string>
+       </property>
       </widget>
      </item>
     </layout>
@@ -297,12 +327,30 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>960</width>
+     <width>1200</width>
      <height>21</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="actionOpen"/>
+    <addaction name="actionSave"/>
+   </widget>
+   <addaction name="menuFile"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
+  <action name="actionOpen">
+   <property name="text">
+    <string>Open</string>
+   </property>
+  </action>
+  <action name="actionSave">
+   <property name="text">
+    <string>Save</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>

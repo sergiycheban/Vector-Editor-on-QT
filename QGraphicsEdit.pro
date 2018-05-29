@@ -33,8 +33,17 @@ SOURCES += \
     selectionrect.cpp \
     diagramitem.cpp \
     line.cpp \
-    elipse.cpp \
-    svssave.cpp
+    svssave.cpp \
+    colorlabel.cpp \
+    diagramitem.cpp \
+    dotsignal.cpp \
+    line.cpp \
+    main.cpp \
+    mainwindow.cpp \
+    rectangle.cpp \
+    selectionrect.cpp \
+    svssave.cpp \
+    workplace.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -45,10 +54,27 @@ HEADERS += \
     selectionrect.h \
     diagramitem.h \
     line.h \
-    elipse.h \
-    svssave.h
+    svssave.h \
+    colorlabel.h \
+    diagramitem.h \
+    dotsignal.h \
+    line.h \
+    mainwindow.h \
+    rectangle.h \
+    selectionrect.h \
+    svssave.h \
+    workplace.h
 
 FORMS += \
         mainwindow.ui
 
-RESOURCES +=
+RESOURCES += \
+    res.qrc
+
+DISTFILES += \
+    Resources/grid-background.jpg \
+    Resources/cube.svg \
+    Resources/paint-palette.svg \
+    Resources/pen.svg \
+    Resources/square.svg \
+    Resources/vector.svg

@@ -4,9 +4,9 @@
 #include <QMainWindow>
 #include <QGraphicsScene>
 #include <QWidget>
+#include <QUndoStack>
 
 
-#include <moveitem.h>
 #include <workplace.h>
 #include <diagramitem.h>
 #include "line.h"
@@ -43,6 +43,7 @@ signals:
 
 
 public slots:
+    void styleSheets();
     void setLineColor(const QColor &color);
     void setLineWidth(const int &width);
 	void setColor(const QColor &color);
@@ -56,22 +57,23 @@ public slots:
 	void deselect();
     void selectNewItem(QGraphicsItem* item);
     void selectItem(QGraphicsItem* item);
+    void checkSelections();
 
 
 private slots:
-
-    void on_m_open_clicked();
-
-    void on_m_save_clicked();
-
     void on_m_line_clicked();
 
     void on_m_square_clicked();
 
+    void on_actionOpen_triggered();
+
+    void on_actionSave_triggered();
+
 private:
-	Ui::MainWindow*		ui;
+    Ui::MainWindow*		m_ui;
     DiagramItem*        myDiagramItem;
 	QGraphicsScene*		scene;
+    QUndoStack*         undoStack;
 	QColor				m_color;
 	int					m_borderWidth;
     int                 m_lineWidth;
@@ -82,7 +84,6 @@ private:
     QPointF myOldPos;
     QPointF newPos;
 
-//	QGraphicsPathItem*	currentPolyline = nullptr;
     QGraphicsRectItem*  rect;
 
 	WorkPlace*			workplaceScene;

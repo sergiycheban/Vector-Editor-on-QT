@@ -9,10 +9,12 @@
 #include <QDebug>
 #include "QFileDialog"
 #include <QSvgGenerator>
+#include <QTableWidget>
+#include <QTimeLine>
+#include <QProgressBar>
 
 #include "workplace.h"
 #include "rectangle.h"
-#include "settings.h"
 #include "line.h"
 #include "svssave.h"
 
@@ -25,9 +27,11 @@ static int randomBetween(int low, int high)
 
 MainWindow::MainWindow(QWidget *parent) :
 	QMainWindow(parent),
-	ui(new Ui::MainWindow)
+    m_ui(new Ui::MainWindow)
 {
-	ui->setupUi(this);
+    m_ui->setupUi(this);
+
+    styleSheets();
 
     setColor(QColor(Qt::yellow));
     setBorderWidth(2);
@@ -40,32 +44,22 @@ MainWindow::MainWindow(QWidget *parent) :
 
 	workplaceScene = new WorkPlace(this);
 
-    workplaceScene->setSceneRect(0,0,960,620);
+    workplaceScene->setSceneRect(0,0,1200,620);
 
+    this->resize(1200,620);
+    this->setFixedSize(1200,620);
+    setStyleSheet("QMenu::item:selected {border: 1px solid black;}");
 
- //   myDiagramItem = new DiagramItem( this );
-
-    this->resize(960,620);
-    this->setFixedSize(960,620);
-
-	 ui->graphicsView->setScene(workplaceScene);
-	 ui->graphicsView->setViewportUpdateMode(QGraphicsView::BoundingRectViewportUpdate);
-	 ui->graphicsView->setCursor(QCursor());
+     m_ui->graphicsView->setScene(workplaceScene);
+     m_ui->graphicsView->setViewportUpdateMode(QGraphicsView::BoundingRectViewportUpdate);
+     m_ui->graphicsView->setCursor(QCursor());
 
     scene = new QGraphicsScene(this);
-	scene->setItemIndexMethod(QGraphicsScene::NoIndex);
+    scene->setItemIndexMethod(QGraphicsScene::NoIndex);
+    m_ui->graphicsView->setCacheMode(QGraphicsView::CacheBackground);
 
- //   ui->graphicsView->resize(960,980);
-	ui->graphicsView->setCacheMode(QGraphicsView::CacheBackground);
 
-//    ui->setupUi(this);
-//    QPixmap bkgnd("D:/2144.jpg");
-//    bkgnd = bkgnd.scaled(this->size(), Qt::IgnoreAspectRatio);
-//    QPalette palette;
-//    palette.setBrush(QPalette::Background, bkgnd);
-//    this->setPalette(palette);
-
-	connect(ui->lineColor, &ColorLabel::clicked,
+    connect(m_ui->lineColor, &ColorLabel::clicked,
 			[=](){
 		QColorDialog dialog;
 		connect(&dialog, &QColorDialog::colorSelected, this, &MainWindow::setColor);
@@ -73,14 +67,14 @@ MainWindow::MainWindow(QWidget *parent) :
 			});
 
 
-	connect(ui->borderColor, &ColorLabel::clicked,
+    connect(m_ui->borderColor, &ColorLabel::clicked,
 			[=](){
 		QColorDialog dialog;
 		connect(&dialog, &QColorDialog::colorSelected, this, &MainWindow::setBorderColor);
 		dialog.exec();
 	});
 
-    connect(ui->borderColor_3, &ColorLabel::clicked,
+    connect(m_ui->borderColor_3, &ColorLabel::clicked,
             [=](){
         QColorDialog dialog;
         connect(&dialog, &QColorDialog::colorSelected, this, &MainWindow::setLineColor);
@@ -88,28 +82,31 @@ MainWindow::MainWindow(QWidget *parent) :
     });
 
 
-	connect(ui->borderWidth, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged),
+    connect(m_ui->borderWidth, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged),
 			this, &MainWindow::setBorderWidth);
 
-    connect(ui->borderWidth_2, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged),
+    connect(m_ui->borderWidth_2, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged),
             this, &MainWindow::setLineWidth);
 
-	connect(ui->m_square, &QToolButton::clicked, [=](){workplaceScene->setCurrentAction(WorkPlace::RectangleType);});
-    connect(ui->m_move, &QToolButton::clicked, [=](){workplaceScene->setCurrentAction(WorkPlace::DefaultType);});   
-    connect(ui->m_line, &QToolButton::clicked, [=](){workplaceScene->setCurrentAction(WorkPlace::LineType);});
+    connect(m_ui->m_square, &QToolButton::clicked, [=](){workplaceScene->setCurrentAction(WorkPlace::RectangleType);});
+    connect(m_ui->m_move, &QToolButton::clicked, [=](){workplaceScene->setCurrentAction(WorkPlace::DefaultType);});
+    connect(m_ui->m_line, &QToolButton::clicked, [=](){workplaceScene->setCurrentAction(WorkPlace::LineType);});
 
     connect(workplaceScene, &WorkPlace::signalSelectItem, this, &MainWindow::selectItem);
 
 	connect(workplaceScene, &WorkPlace::signalNewSelectItem, this, &MainWindow::selectNewItem);
-    ui->widget_line->hide();
-    ui->widget_rect->hide();
+
+    connect(workplaceScene, &WorkPlace::selectionChanged, this, &MainWindow::checkSelections);
+
+    m_ui->widget_line->hide();
+    m_ui->widget_rect->hide();
 
 }
 
 
 MainWindow::~MainWindow()
 {
-	delete ui;
+    delete m_ui;
 	delete currentRectangle;
     delete currentLine;
 }
@@ -135,11 +132,45 @@ int MainWindow::lineWidth() const
     return m_lineWidth;
 }
 
+void MainWindow::styleSheets()
+{
+    setWindowIcon(QIcon(":/icon/Resources/cube.svg"));
+
+    QPixmap bkgnd(":/icon/Resources/grid-background.jpg");
+    bkgnd = bkgnd.scaled(this->size(), Qt::IgnoreAspectRatio);
+    QPalette palette;
+    palette.setBrush(QPalette::Background, bkgnd);
+    this->setPalette(palette);
+
+
+    QPixmap pixmapReset(":/icon/Resources/square.svg");
+    QIcon ButtonIconReset(pixmapReset);
+    m_ui->m_square->setIcon(ButtonIconReset);
+    m_ui->m_square->setIconSize(QSize(30,30));
+    m_ui->m_square->setStyleSheet("background-color:white;");
+
+    QPixmap pixmapSearch(":/icon/Resources/pen.svg");
+    QIcon ButtonIconSearch(pixmapSearch);
+    m_ui->m_line->setIcon(ButtonIconSearch);
+    m_ui->m_line->setIconSize(QSize(30,30));
+    m_ui->m_line->setStyleSheet("background-color:white;");
+
+    QPixmap pixmapClose(":/icon/Resources/vector.svg");
+    QIcon ButtonIconClose(pixmapClose);
+    m_ui->m_move->setIcon(ButtonIconClose);
+    m_ui->m_move->setIconSize(QSize(30,30));
+    m_ui->m_move->setStyleSheet("background-color:white;");
+
+    QFont newFont("StyleItalic", 8, QFont::Medium);
+    QApplication::setFont(newFont);
+
+}
+
 
 void MainWindow::setLineColor(const QColor &color)
 {
     m_lineColor = color;
-    ui->borderColor_3->setColor(m_lineColor);
+    m_ui->borderColor_3->setColor(m_lineColor);
     if(currentLine != nullptr){
         QPen pen(color,currentLine->pen().width());
         currentLine->setPen(pen);
@@ -150,7 +181,7 @@ void MainWindow::setLineColor(const QColor &color)
 void MainWindow::setLineWidth(const int &width)
 {
     m_lineWidth = width;
-    ui->borderWidth_2->setValue(m_lineWidth);
+    m_ui->borderWidth_2->setValue(m_lineWidth);
     if(currentLine != nullptr){
         QPen pen(currentLine->pen().color(),width);
         currentLine->setPen(pen);
@@ -161,7 +192,7 @@ void MainWindow::setLineWidth(const int &width)
 void MainWindow::setColor(const QColor &color)
 {
     m_color = color;
-    ui->lineColor->setColor(color);
+    m_ui->lineColor->setColor(color);
     if(currentRectangle != nullptr)
             currentRectangle->setBrush(QBrush(m_color));
 	qDebug() << "color =" << " " << color;
@@ -186,7 +217,7 @@ void MainWindow::setBorderWidth(const int &width)
 void MainWindow::setBorderColor(const QColor &color)
 {
     m_borderColor = color;
-	ui->borderColor->setColor(color);
+    m_ui->borderColor->setColor(color);
 	if(currentRectangle != nullptr){
 		QPen pen(color,currentRectangle->pen().width());
 		currentRectangle->setPen(pen);
@@ -196,10 +227,7 @@ void MainWindow::setBorderColor(const QColor &color)
 
 void MainWindow::newRectangle(Rectangle* rect)
 {
-
-        qDebug() << "newRectangle";
 		rect->setBrush(QBrush(m_color));
-
     if(m_borderWidth == 0)
 		rect->setPen(Qt::NoPen);
      else
@@ -230,8 +258,8 @@ void MainWindow::loadLine(Line *line)
     currentLine = line;
     m_lineColor = currentLine->pen().color();
     m_lineWidth = currentLine->pen().width();
-    ui->borderColor_3->setColor(m_lineColor);
-    ui->borderWidth_2->setValue(m_lineWidth);
+    m_ui->borderColor_3->setColor(m_lineColor);
+    m_ui->borderWidth_2->setValue(m_lineWidth);
 }
 
 
@@ -295,8 +323,34 @@ void MainWindow::selectItem(QGraphicsItem *item)
     }
 }
 
+void MainWindow::checkSelections()
+{
+   if(workplaceScene->selectedItems().length() > 1)
+   {
+       m_ui->widget_line->setEnabled( false );
+       m_ui->widget_rect->setEnabled( false );
+   }
+   else
+   {
+       m_ui->widget_line->setEnabled( true );
+       m_ui->widget_rect->setEnabled( true );
+   }
+}
 
-void MainWindow::on_m_open_clicked()
+
+void MainWindow::on_m_line_clicked()
+{
+    m_ui->widget_rect->hide();
+    m_ui->widget_line->show();
+}
+
+void MainWindow::on_m_square_clicked()
+{
+     m_ui->widget_line->hide();
+     m_ui->widget_rect->show();
+}
+
+void MainWindow::on_actionOpen_triggered()
 {
     QString newPath = QFileDialog::getOpenFileName(this, trUtf8("Open SVG"),
                                                    path, tr("SVG files (*.svg)"));
@@ -330,7 +384,7 @@ void MainWindow::on_m_open_clicked()
     }
 }
 
-void MainWindow::on_m_save_clicked()
+void MainWindow::on_actionSave_triggered()
 {
     QString newPath = QFileDialog::getSaveFileName(this, trUtf8("Save SVG"),
         path, tr("SVG files (*.svg)"));
@@ -351,17 +405,5 @@ void MainWindow::on_m_save_clicked()
     painter.begin(&generator);
     workplaceScene->render(&painter);
     painter.end();
-    QMessageBox::warning( this,"=)", "Yeap" );
 }
 
-void MainWindow::on_m_line_clicked()
-{
-    ui->widget_rect->hide();
-    ui->widget_line->show();
-}
-
-void MainWindow::on_m_square_clicked()
-{
-     ui->widget_line->hide();
-     ui->widget_rect->show();
-}
