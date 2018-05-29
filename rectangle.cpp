@@ -65,18 +65,18 @@ void Rectangle::setRect(qreal x, qreal y, qreal w, qreal h)
 void Rectangle::setRect(const QRectF &rect)
 {
     QGraphicsRectItem::setRect(rect);
-    if(brush().gradient() != 0){
-        const QGradient * grad = brush().gradient();
-        if(grad->type() == QGradient::LinearGradient){
-            auto tmpRect = this->rect();
-            const QLinearGradient *lGradient = static_cast<const QLinearGradient *>(grad);
-            QLinearGradient g = *const_cast<QLinearGradient*>(lGradient);
-            g.setStart(tmpRect.left() + tmpRect.width()/2,tmpRect.top());
-            g.setFinalStop(tmpRect.left() + tmpRect.width()/2,tmpRect.bottom());
-            setBrush(g);
-        }
+//    if(brush().gradient() != 0){
+//        const QGradient * grad = brush().gradient();
+//        if(grad->type() == QGradient::LinearGradient){
+//            auto tmpRect = this->rect();
+//            const QLinearGradient *lGradient = static_cast<const QLinearGradient *>(grad);
+//            QLinearGradient g = *const_cast<QLinearGradient*>(lGradient);
+//            g.setStart(tmpRect.left() + tmpRect.width()/2,tmpRect.top());
+//            g.setFinalStop(tmpRect.left() + tmpRect.width()/2,tmpRect.bottom());
+//            setBrush(g);
+//        }
     }
-}
+
 
 
 
