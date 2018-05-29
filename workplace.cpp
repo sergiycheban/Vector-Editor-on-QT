@@ -6,6 +6,7 @@
 #include "rectangle.h"
 #include "selectionrect.h"
 #include "mainwindow.h"
+#include "line.h"
 
 WorkPlace::WorkPlace(QObject *parent) :
 	QGraphicsScene(parent),
@@ -64,10 +65,26 @@ void WorkPlace::mousePressEvent(QGraphicsSceneMouseEvent *event)
 	}
 	switch (m_currentAction) {
 
+    case LineType: {
+        if (m_leftMouseButtonPressed && !(event->button() & Qt::RightButton) && !(event->button() & Qt::MiddleButton)) {
+            deselectItems();
+            Line* line = new Line();
+            currentItem = line;
+            addItem(currentItem);
+            connect(line, &Line::clicked, this, &WorkPlace::signalSelectItem);
+            connect(line, &Line::signalMove, this, &WorkPlace::slotMove);
+            QPainterPath path;
+            path.moveTo(m_previousPosition);
+            line->setPath(path);
+            emit signalNewSelectItem(line);
+        }
+        break;
+    }
+
 	case RectangleType: {
 		if (m_leftMouseButtonPressed && !(event->button() & Qt::RightButton) && !(event->button() & Qt::MiddleButton)) {
 			deselectItems();
-			Rectangle *rectangle = new Rectangle();
+            Rectangle* rectangle = new Rectangle();
 			currentItem = rectangle;
 			addItem(currentItem);
 			connect(rectangle, &Rectangle::clicked, this, &WorkPlace::signalSelectItem);
@@ -95,6 +112,18 @@ void WorkPlace::mousePressEvent(QGraphicsSceneMouseEvent *event)
 void WorkPlace::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
 	switch (m_currentAction) {
+
+    case LineType: {
+        if (m_leftMouseButtonPressed) {
+            Line* line = qgraphicsitem_cast<Line *>(currentItem);
+            QPainterPath path;
+            path.moveTo(m_previousPosition);
+            path.lineTo(event->scenePos());
+            line->setPath(path);
+        }
+        break;
+    }
+
 	case RectangleType: {
 		if (m_leftMouseButtonPressed) {
 			auto dx = event->scenePos().x() - m_previousPosition.x();
@@ -129,6 +158,7 @@ void WorkPlace::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
 	if (event->button() & Qt::LeftButton) m_leftMouseButtonPressed = false;
 	switch (m_currentAction) {
+    case LineType:
 	case RectangleType: {
 		if (!m_leftMouseButtonPressed &&
 				!(event->button() & Qt::RightButton) &&
@@ -162,19 +192,6 @@ void WorkPlace::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 	}
 	}
 }
-
-//void WorkPlace::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event)
-//{
-//	switch (m_currentAction) {
-//	case LineType:
-//	case RectangleType:
-//	case SelectionType:
-//		break;
-//	default:
-//		QGraphicsScene::mouseDoubleClickEvent(event);
-//		break;
-//	}
-//}
 
 void WorkPlace::keyPressEvent(QKeyEvent *event)
 {

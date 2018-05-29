@@ -1,4 +1,4 @@
-#ifndef WORKPLACE_H
+ #ifndef WORKPLACE_H
 #define WORKPLACE_H
 
 #include <QObject>

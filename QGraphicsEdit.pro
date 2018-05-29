@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui svg xml
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -30,7 +30,11 @@ SOURCES += \
     rectangle.cpp \
     dotsignal.cpp \
     workplace.cpp \
-    selectionrect.cpp
+    selectionrect.cpp \
+    diagramitem.cpp \
+    line.cpp \
+    elipse.cpp \
+    svssave.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -38,7 +42,11 @@ HEADERS += \
     rectangle.h \
     dotsignal.h \
     workplace.h \
-    selectionrect.h
+    selectionrect.h \
+    diagramitem.h \
+    line.h \
+    elipse.h \
+    svssave.h
 
 FORMS += \
         mainwindow.ui

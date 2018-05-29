@@ -9,7 +9,7 @@ Dotsignal::Dotsignal(QGraphicsItem *parentItem, QObject *parent) :
 {
     setParentItem(parentItem);
     setAcceptHoverEvents(true);
-    setBrush(QBrush(Qt::red));
+    setBrush(QBrush(Qt::black));
     setRect(-4,-4,8,8);
     setDotFlags(0);
 }
