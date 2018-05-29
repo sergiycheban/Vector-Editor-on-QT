@@ -55,15 +55,15 @@ void WorkPlace::setPreviousPosition(const QPointF previousPosition)
 
 void WorkPlace::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
-	if (event->button() & Qt::LeftButton) {
-		m_leftMouseButtonPressed = true;
-		setPreviousPosition(event->scenePos());
-		if(QApplication::keyboardModifiers() & Qt::ShiftModifier){
-			m_previousAction = m_currentAction;
-			setCurrentAction(SelectionType);
-		}
-	}
-	switch (m_currentAction) {
+    if (event->button() & Qt::LeftButton) {
+        m_leftMouseButtonPressed = true;
+        setPreviousPosition(event->scenePos());
+        if(QApplication::keyboardModifiers() & Qt::ShiftModifier){
+            m_previousAction = m_currentAction;
+            setCurrentAction(SelectionType);
+        }
+    }
+    switch (m_currentAction) {
 
     case LineType: {
         if (m_leftMouseButtonPressed && !(event->button() & Qt::RightButton) && !(event->button() & Qt::MiddleButton)) {
@@ -81,37 +81,29 @@ void WorkPlace::mousePressEvent(QGraphicsSceneMouseEvent *event)
         break;
     }
 
-	case RectangleType: {
-		if (m_leftMouseButtonPressed && !(event->button() & Qt::RightButton) && !(event->button() & Qt::MiddleButton)) {
-			deselectItems();
+    case RectangleType: {
+        if (m_leftMouseButtonPressed && !(event->button() & Qt::RightButton) && !(event->button() & Qt::MiddleButton)) {
+            deselectItems();
             Rectangle* rectangle = new Rectangle();
-			currentItem = rectangle;
-			addItem(currentItem);
-			connect(rectangle, &Rectangle::clicked, this, &WorkPlace::signalSelectItem);
-			connect(rectangle, &Rectangle::signalMove, this, &WorkPlace::slotMove);
-			emit signalNewSelectItem(rectangle);
-		}
-		break;
-	}
-	case SelectionType: {
-		if (m_leftMouseButtonPressed && !(event->button() & Qt::RightButton) && !(event->button() & Qt::MiddleButton)) {
-			deselectItems();
-			SelectionRect *selection = new SelectionRect();
-			currentItem = selection;
-			addItem(currentItem);
-		}
-		break;
-	}
-	default: {
-		QGraphicsScene::mousePressEvent(event);
-		break;
-	}
-	}
+            currentItem = rectangle;
+            addItem(currentItem);
+            connect(rectangle, &Rectangle::clicked, this, &WorkPlace::signalSelectItem);
+            connect(rectangle, &Rectangle::signalMove, this, &WorkPlace::slotMove);
+            emit signalNewSelectItem(rectangle);
+        }
+        break;
+    }
+
+    default: {
+        QGraphicsScene::mousePressEvent(event);
+        break;
+    }
+    }
 }
 
 void WorkPlace::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
-	switch (m_currentAction) {
+    switch (m_currentAction) {
 
     case LineType: {
         if (m_leftMouseButtonPressed) {
@@ -124,73 +116,44 @@ void WorkPlace::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
         break;
     }
 
-	case RectangleType: {
-		if (m_leftMouseButtonPressed) {
-			auto dx = event->scenePos().x() - m_previousPosition.x();
-			auto dy = event->scenePos().y() - m_previousPosition.y();
-			Rectangle * rectangle = qgraphicsitem_cast<Rectangle *>(currentItem);
-			rectangle->setRect((dx > 0) ? m_previousPosition.x() : event->scenePos().x(),
-								   (dy > 0) ? m_previousPosition.y() : event->scenePos().y(),
-								   qAbs(dx), qAbs(dy));
-		}
-		break;
-	}
-	case SelectionType: {
-		if (m_leftMouseButtonPressed) {
-			auto dx = event->scenePos().x() - m_previousPosition.x();
-			auto dy = event->scenePos().y() - m_previousPosition.y();
-			SelectionRect* selection = qgraphicsitem_cast<SelectionRect*>(currentItem);
-			selection->setRect((dx > 0) ? m_previousPosition.x() : event->scenePos().x(),
-								   (dy > 0) ? m_previousPosition.y() : event->scenePos().y(),
-								   qAbs(dx), qAbs(dy));
-		}
-		break;
-	}
-	default: {
-		QGraphicsScene::mouseMoveEvent(event);
-		break;
-	}
-	}
+    case RectangleType: {
+        if (m_leftMouseButtonPressed) {
+            auto dx = event->scenePos().x() - m_previousPosition.x();
+            auto dy = event->scenePos().y() - m_previousPosition.y();
+            Rectangle * rectangle = qgraphicsitem_cast<Rectangle *>(currentItem);
+            rectangle->setRect((dx > 0) ? m_previousPosition.x() : event->scenePos().x(),
+                                   (dy > 0) ? m_previousPosition.y() : event->scenePos().y(),
+                                   qAbs(dx), qAbs(dy));
+        }
+        break;
+    }
+
+    default: {
+        QGraphicsScene::mouseMoveEvent(event);
+        break;
+    }
+    }
 }
 
 
 void WorkPlace::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
-	if (event->button() & Qt::LeftButton) m_leftMouseButtonPressed = false;
-	switch (m_currentAction) {
+    if (event->button() & Qt::LeftButton) m_leftMouseButtonPressed = false;
+    switch (m_currentAction) {
     case LineType:
-	case RectangleType: {
-		if (!m_leftMouseButtonPressed &&
-				!(event->button() & Qt::RightButton) &&
-				!(event->button() & Qt::MiddleButton)) {
-			currentItem = nullptr;
-		}
-		break;
-	}
-	case SelectionType: {
-		if (!m_leftMouseButtonPressed &&
-				!(event->button() & Qt::RightButton) &&
-				!(event->button() & Qt::MiddleButton)) {
-			SelectionRect * selection = qgraphicsitem_cast<SelectionRect *>(currentItem);
-			if(!selection->collidingItems().isEmpty()){
-				foreach (QGraphicsItem *item, selection->collidingItems()) {
-					item->setSelected(true);
-				}
-			}
-			selection->deleteLater();
-			if(selectedItems().length() == 1){
-				signalSelectItem(selectedItems().at(0));
-			}
-			setCurrentAction(m_previousAction);
-			currentItem = nullptr;
-		}
-		break;
-	}
-	default: {
-		QGraphicsScene::mouseReleaseEvent(event);
-		break;
-	}
-	}
+    case RectangleType: {
+        if (!m_leftMouseButtonPressed &&
+                !(event->button() & Qt::RightButton) &&
+                !(event->button() & Qt::MiddleButton)) {
+            currentItem = nullptr;
+        }
+        break;
+    }
+    default: {
+        QGraphicsScene::mouseReleaseEvent(event);
+        break;
+    }
+    }
 }
 
 void WorkPlace::keyPressEvent(QKeyEvent *event)

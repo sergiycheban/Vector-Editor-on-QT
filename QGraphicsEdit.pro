@@ -30,7 +30,6 @@ SOURCES += \
     rectangle.cpp \
     dotsignal.cpp \
     workplace.cpp \
-    selectionrect.cpp \
     diagramitem.cpp \
     line.cpp \
     svssave.cpp \
@@ -41,7 +40,6 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     rectangle.cpp \
-    selectionrect.cpp \
     svssave.cpp \
     workplace.cpp
 
@@ -51,7 +49,6 @@ HEADERS += \
     rectangle.h \
     dotsignal.h \
     workplace.h \
-    selectionrect.h \
     diagramitem.h \
     line.h \
     svssave.h \
@@ -61,7 +58,6 @@ HEADERS += \
     line.h \
     mainwindow.h \
     rectangle.h \
-    selectionrect.h \
     svssave.h \
     workplace.h
 

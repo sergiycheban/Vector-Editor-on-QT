@@ -65,20 +65,12 @@ void Rectangle::setRect(qreal x, qreal y, qreal w, qreal h)
 void Rectangle::setRect(const QRectF &rect)
 {
     QGraphicsRectItem::setRect(rect);
-//    if(brush().gradient() != 0){
-//        const QGradient * grad = brush().gradient();
-//        if(grad->type() == QGradient::LinearGradient){
-//            auto tmpRect = this->rect();
-//            const QLinearGradient *lGradient = static_cast<const QLinearGradient *>(grad);
-//            QLinearGradient g = *const_cast<QLinearGradient*>(lGradient);
-//            g.setStart(tmpRect.left() + tmpRect.width()/2,tmpRect.top());
-//            g.setFinalStop(tmpRect.left() + tmpRect.width()/2,tmpRect.bottom());
-//            setBrush(g);
-//        }
-    }
+}
 
+void Rectangle::Rosina( QString = "cate" )
+{
 
-
+}
 
 void Rectangle::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
@@ -168,7 +160,6 @@ void Rectangle::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 
 void Rectangle::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event)
 {
-    qDebug() << "dUBLE";
     m_actionFlags = (m_actionFlags == ResizeState)?RotationState:ResizeState;
     setVisibilityGrabbers();
     QGraphicsItem::mouseDoubleClickEvent(event);
@@ -243,7 +234,7 @@ void Rectangle::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
         case BottomLeft:
         case BottomRight: {
             QPixmap p(":/icon/Resources/spiral.svg");
-            setCursor(QCursor(p.scaled(24,24,Qt::KeepAspectRatio)));
+            setCursor(QCursor(p.scaled(40,40,Qt::KeepAspectRatio)));
             break;
         }
         default:
@@ -339,6 +330,7 @@ void Rectangle::resizeTop(const QPointF &pt)
         tmpRect.setHeight( -heightOffset );
     else
         tmpRect.setHeight( heightOffset );
+
     tmpRect.translate( 0 , rect().height() - tmpRect.height() );
     prepareGeometryChange();
     setRect( tmpRect );

@@ -104,7 +104,6 @@ void Line::slotMove(QGraphicsItem *signalOwner, qreal dx, qreal dy)
         if(listDotes.at(i) == signalOwner){
             QPointF pathPoint = linePath.elementAt(i);
             linePath.setElementPositionAt(i, pathPoint.x() + dx, pathPoint.y() + dy);
-            //m_pointForCheck = i;
         }
     }
     setPath(linePath);
