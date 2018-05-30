@@ -90,29 +90,7 @@ QList<QGraphicsItem *> SvgSave::getElements(const QString filename)
             QString transString = gElement.attribute("transform");
             transString.replace(QString("matrix("),QString(""));
             transString.replace(QString(")"),QString(""));
-            QStringList transList = transString.split(",");
 
-            QTransform trans(rect->transform());
-
-            qreal m11 = trans.m11();
-            qreal m12 = trans.m12();
-            qreal m13 = trans.m13();
-            qreal m21 = trans.m21();
-            qreal m22 = trans.m22();
-            qreal m23 = trans.m23();
-            qreal m31 = trans.m31();
-            qreal m32 = trans.m32();
-            qreal m33 = trans.m33();
-
-            m11 = transList.at(0).toFloat();
-            m12 = transList.at(1).toFloat();
-            m21 = transList.at(2).toFloat();
-            m22 = transList.at(3).toFloat();
-            m31 = transList.at(4).toFloat();
-            m32 = transList.at(5).toFloat();
-
-            trans.setMatrix(m11,m12,m13,m21,m22,m23,m31,m32,m33);
-            rect->setTransform(trans);
             rect->setPen(QPen(strokeColor,gElement.attribute("stroke-width", "0").toInt()));
 
             graphicsList.append(rect);

@@ -19,12 +19,6 @@
 #include "svssave.h"
 
 
-static int randomBetween(int low, int high)
-{
-	return (qrand() % ((high + 1) - low) + low);
-}
-
-
 MainWindow::MainWindow(QWidget *parent) :
 	QMainWindow(parent),
     m_ui(new Ui::MainWindow)
@@ -66,7 +60,6 @@ MainWindow::MainWindow(QWidget *parent) :
 		dialog.exec();
 			});
 
-
     connect(m_ui->borderColor, &ColorLabel::clicked,
 			[=](){
 		QColorDialog dialog;
@@ -87,6 +80,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(m_ui->borderWidth_2, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged),
             this, &MainWindow::setLineWidth);
+
 
     connect(m_ui->m_square, &QToolButton::clicked, [=](){workplaceScene->setCurrentAction(WorkPlace::RectangleType);});
     connect(m_ui->m_move, &QToolButton::clicked, [=](){workplaceScene->setCurrentAction(WorkPlace::DefaultType);});
@@ -141,7 +135,6 @@ void MainWindow::styleSheets()
     QPalette palette;
     palette.setBrush(QPalette::Background, bkgnd);
     this->setPalette(palette);
-
 
     QPixmap pixmapReset(":/icon/Resources/square.svg");
     QIcon ButtonIconReset(pixmapReset);
@@ -271,11 +264,11 @@ void MainWindow::deselect()
 
 void MainWindow::setVisible(bool visible)
 {
-	if(!visible && currentRectangle != nullptr){
-		QWidget::setVisible(true);
-	} else {
-		QWidget::setVisible(visible);
-	}
+    if(!visible && currentRectangle != nullptr){
+        QWidget::setVisible(true);
+    } else {
+        QWidget::setVisible(visible);
+    }
 
     if(!visible && currentLine != nullptr){
         QWidget::setVisible(true);
@@ -365,17 +358,13 @@ void MainWindow::on_actionOpen_triggered()
     foreach (QGraphicsItem *item, SvgSave::getElements(path)) {
         switch (item->type()) {
         case QGraphicsPathItem::Type: {
-            Line *polyline = qgraphicsitem_cast<Line*>(item);
-            workplaceScene->addItem(polyline);
-            connect(polyline, &Line::clicked, workplaceScene, &WorkPlace::signalSelectItem);
-            connect(polyline, &Line::signalMove, workplaceScene, &WorkPlace::slotMove);
+            Line *line = qgraphicsitem_cast<Line*>(item);
+            workplaceScene->addItem(line);
             break;
         }
         case QGraphicsRectItem::Type: {
             Rectangle *rect = qgraphicsitem_cast<Rectangle*>(item);
             workplaceScene->addItem(rect);
-            connect(rect, &Rectangle::clicked, workplaceScene, &WorkPlace::signalSelectItem);
-            connect(rect, &Rectangle::signalMove, workplaceScene, &WorkPlace::slotMove);
             break;
         }
         default:

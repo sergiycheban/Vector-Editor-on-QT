@@ -87,5 +87,5 @@ void Dotsignal::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 void Dotsignal::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event)
-    setBrush(QBrush(Qt::red));
+    setBrush(QBrush(Qt::black));
 }
