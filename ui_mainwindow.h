@@ -14,6 +14,7 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QGraphicsView>
+#include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
@@ -23,6 +24,7 @@
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QSpinBox>
 #include <QtWidgets/QStatusBar>
+#include <QtWidgets/QTabWidget>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 #include "colorlabel.h"
@@ -34,13 +36,24 @@ class Ui_MainWindow
 public:
     QAction *actionOpen;
     QAction *actionSave;
+    QAction *actionAdd_tad;
+    QAction *actionInfo;
+    QAction *actionSelect_all;
+    QAction *actionDelete_Item;
     QWidget *centralWidget;
+    QGridLayout *gridLayout_2;
+    QVBoxLayout *verticalLayout_2;
+    QPushButton *m_square;
+    QPushButton *m_line;
+    QPushButton *m_move;
+    QTabWidget *tabWidget;
+    QWidget *tab;
     QGraphicsView *graphicsView;
-    ColorLabel *borderColor_2;
-    QWidget *layoutWidget;
+    QWidget *tab_2;
+    QGraphicsView *graphicsView_3;
     QVBoxLayout *verticalLayout_3;
     QWidget *widget_rect;
-    QWidget *layoutWidget1;
+    QWidget *layoutWidget;
     QVBoxLayout *verticalLayout_4;
     QLabel *label;
     ColorLabel *lineColor;
@@ -50,91 +63,151 @@ public:
     QSpinBox *borderWidth;
     QSpacerItem *verticalSpacer;
     QWidget *widget_line;
-    QWidget *layoutWidget2;
+    QWidget *layoutWidget1;
     QVBoxLayout *verticalLayout;
     QLabel *label_3;
     ColorLabel *borderColor_3;
     QLabel *label_5;
     QSpinBox *borderWidth_2;
     QSpacerItem *verticalSpacer_2;
-    QWidget *layoutWidget3;
-    QVBoxLayout *verticalLayout_2;
-    QPushButton *m_square;
-    QPushButton *m_line;
-    QPushButton *m_move;
+    QStatusBar *statusBar;
     QMenuBar *menuBar;
     QMenu *menuFile;
-    QStatusBar *statusBar;
+    QMenu *menuTools;
+    QMenu *menuHelp;
+    QMenu *menuEdit;
 
     void setupUi(QMainWindow *MainWindow)
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
+        MainWindow->setWindowModality(Qt::NonModal);
         MainWindow->setEnabled(true);
         MainWindow->resize(1200, 620);
         MainWindow->setMaximumSize(QSize(1200, 620));
+        QFont font;
+        font.setKerning(true);
+        MainWindow->setFont(font);
+        MainWindow->setAutoFillBackground(false);
+        MainWindow->setAnimated(true);
         actionOpen = new QAction(MainWindow);
         actionOpen->setObjectName(QStringLiteral("actionOpen"));
         actionSave = new QAction(MainWindow);
         actionSave->setObjectName(QStringLiteral("actionSave"));
+        actionAdd_tad = new QAction(MainWindow);
+        actionAdd_tad->setObjectName(QStringLiteral("actionAdd_tad"));
+        actionInfo = new QAction(MainWindow);
+        actionInfo->setObjectName(QStringLiteral("actionInfo"));
+        actionSelect_all = new QAction(MainWindow);
+        actionSelect_all->setObjectName(QStringLiteral("actionSelect_all"));
+        actionDelete_Item = new QAction(MainWindow);
+        actionDelete_Item->setObjectName(QStringLiteral("actionDelete_Item"));
+        actionDelete_Item->setCheckable(false);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
-        graphicsView = new QGraphicsView(centralWidget);
+        gridLayout_2 = new QGridLayout(centralWidget);
+        gridLayout_2->setSpacing(6);
+        gridLayout_2->setContentsMargins(11, 11, 11, 11);
+        gridLayout_2->setObjectName(QStringLiteral("gridLayout_2"));
+        verticalLayout_2 = new QVBoxLayout();
+        verticalLayout_2->setSpacing(6);
+        verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
+        m_square = new QPushButton(centralWidget);
+        m_square->setObjectName(QStringLiteral("m_square"));
+        m_square->setEnabled(true);
+        m_square->setMaximumSize(QSize(90, 30));
+        m_square->setCheckable(false);
+
+        verticalLayout_2->addWidget(m_square);
+
+        m_line = new QPushButton(centralWidget);
+        m_line->setObjectName(QStringLiteral("m_line"));
+        m_line->setMaximumSize(QSize(90, 30));
+
+        verticalLayout_2->addWidget(m_line);
+
+        m_move = new QPushButton(centralWidget);
+        m_move->setObjectName(QStringLiteral("m_move"));
+        m_move->setMaximumSize(QSize(90, 30));
+
+        verticalLayout_2->addWidget(m_move);
+
+
+        gridLayout_2->addLayout(verticalLayout_2, 0, 0, 1, 2);
+
+        tabWidget = new QTabWidget(centralWidget);
+        tabWidget->setObjectName(QStringLiteral("tabWidget"));
+        tabWidget->setAutoFillBackground(false);
+        tabWidget->setTabPosition(QTabWidget::North);
+        tabWidget->setTabShape(QTabWidget::Triangular);
+        tabWidget->setIconSize(QSize(32, 32));
+        tabWidget->setElideMode(Qt::ElideMiddle);
+        tabWidget->setUsesScrollButtons(false);
+        tabWidget->setDocumentMode(false);
+        tabWidget->setTabsClosable(true);
+        tabWidget->setMovable(true);
+        tab = new QWidget();
+        tab->setObjectName(QStringLiteral("tab"));
+        graphicsView = new QGraphicsView(tab);
         graphicsView->setObjectName(QStringLiteral("graphicsView"));
-        graphicsView->setGeometry(QRect(95, 10, 1091, 571));
-        borderColor_2 = new ColorLabel(centralWidget);
-        borderColor_2->setObjectName(QStringLiteral("borderColor_2"));
-        borderColor_2->setGeometry(QRect(11, 350, 16, 16));
-        layoutWidget = new QWidget(centralWidget);
-        layoutWidget->setObjectName(QStringLiteral("layoutWidget"));
-        layoutWidget->setGeometry(QRect(0, 150, 91, 351));
-        verticalLayout_3 = new QVBoxLayout(layoutWidget);
+        graphicsView->setGeometry(QRect(0, 0, 1091, 529));
+        graphicsView->setMaximumSize(QSize(16777215, 529));
+        tabWidget->addTab(tab, QString());
+        tab_2 = new QWidget();
+        tab_2->setObjectName(QStringLiteral("tab_2"));
+        graphicsView_3 = new QGraphicsView(tab_2);
+        graphicsView_3->setObjectName(QStringLiteral("graphicsView_3"));
+        graphicsView_3->setGeometry(QRect(0, 0, 1091, 529));
+        graphicsView_3->setMaximumSize(QSize(16777215, 529));
+        tabWidget->addTab(tab_2, QString());
+
+        gridLayout_2->addWidget(tabWidget, 0, 2, 4, 1);
+
+        verticalLayout_3 = new QVBoxLayout();
         verticalLayout_3->setSpacing(6);
-        verticalLayout_3->setContentsMargins(11, 11, 11, 11);
         verticalLayout_3->setObjectName(QStringLiteral("verticalLayout_3"));
-        verticalLayout_3->setContentsMargins(0, 0, 0, 0);
-        widget_rect = new QWidget(layoutWidget);
+        widget_rect = new QWidget(centralWidget);
         widget_rect->setObjectName(QStringLiteral("widget_rect"));
-        layoutWidget1 = new QWidget(widget_rect);
-        layoutWidget1->setObjectName(QStringLiteral("layoutWidget1"));
-        layoutWidget1->setGeometry(QRect(0, 0, 92, 171));
-        verticalLayout_4 = new QVBoxLayout(layoutWidget1);
+        layoutWidget = new QWidget(widget_rect);
+        layoutWidget->setObjectName(QStringLiteral("layoutWidget"));
+        layoutWidget->setGeometry(QRect(0, 0, 71, 171));
+        verticalLayout_4 = new QVBoxLayout(layoutWidget);
         verticalLayout_4->setSpacing(6);
         verticalLayout_4->setContentsMargins(11, 11, 11, 11);
         verticalLayout_4->setObjectName(QStringLiteral("verticalLayout_4"));
         verticalLayout_4->setContentsMargins(0, 0, 0, 0);
-        label = new QLabel(layoutWidget1);
+        label = new QLabel(layoutWidget);
         label->setObjectName(QStringLiteral("label"));
         label->setMaximumSize(QSize(90, 30));
 
         verticalLayout_4->addWidget(label);
 
-        lineColor = new ColorLabel(layoutWidget1);
+        lineColor = new ColorLabel(layoutWidget);
         lineColor->setObjectName(QStringLiteral("lineColor"));
         lineColor->setMaximumSize(QSize(90, 20));
 
         verticalLayout_4->addWidget(lineColor);
 
-        label_2 = new QLabel(layoutWidget1);
+        label_2 = new QLabel(layoutWidget);
         label_2->setObjectName(QStringLiteral("label_2"));
         label_2->setMaximumSize(QSize(90, 30));
 
         verticalLayout_4->addWidget(label_2);
 
-        borderColor = new ColorLabel(layoutWidget1);
+        borderColor = new ColorLabel(layoutWidget);
         borderColor->setObjectName(QStringLiteral("borderColor"));
         borderColor->setMaximumSize(QSize(90, 20));
 
         verticalLayout_4->addWidget(borderColor);
 
-        label_4 = new QLabel(layoutWidget1);
+        label_4 = new QLabel(layoutWidget);
         label_4->setObjectName(QStringLiteral("label_4"));
         label_4->setMaximumSize(QSize(90, 30));
         label_4->setScaledContents(false);
 
         verticalLayout_4->addWidget(label_4);
 
-        borderWidth = new QSpinBox(layoutWidget1);
+        borderWidth = new QSpinBox(layoutWidget);
         borderWidth->setObjectName(QStringLiteral("borderWidth"));
         borderWidth->setMaximumSize(QSize(90, 30));
         borderWidth->setMinimum(0);
@@ -150,36 +223,36 @@ public:
 
         verticalLayout_3->addWidget(widget_rect);
 
-        widget_line = new QWidget(layoutWidget);
+        widget_line = new QWidget(centralWidget);
         widget_line->setObjectName(QStringLiteral("widget_line"));
-        layoutWidget2 = new QWidget(widget_line);
-        layoutWidget2->setObjectName(QStringLiteral("layoutWidget2"));
-        layoutWidget2->setGeometry(QRect(0, 0, 91, 111));
-        verticalLayout = new QVBoxLayout(layoutWidget2);
+        layoutWidget1 = new QWidget(widget_line);
+        layoutWidget1->setObjectName(QStringLiteral("layoutWidget1"));
+        layoutWidget1->setGeometry(QRect(0, 0, 71, 125));
+        verticalLayout = new QVBoxLayout(layoutWidget1);
         verticalLayout->setSpacing(6);
         verticalLayout->setContentsMargins(11, 11, 11, 11);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         verticalLayout->setContentsMargins(0, 0, 0, 0);
-        label_3 = new QLabel(layoutWidget2);
+        label_3 = new QLabel(layoutWidget1);
         label_3->setObjectName(QStringLiteral("label_3"));
         label_3->setMaximumSize(QSize(90, 30));
 
         verticalLayout->addWidget(label_3);
 
-        borderColor_3 = new ColorLabel(layoutWidget2);
+        borderColor_3 = new ColorLabel(layoutWidget1);
         borderColor_3->setObjectName(QStringLiteral("borderColor_3"));
         borderColor_3->setMaximumSize(QSize(90, 20));
 
         verticalLayout->addWidget(borderColor_3);
 
-        label_5 = new QLabel(layoutWidget2);
+        label_5 = new QLabel(layoutWidget1);
         label_5->setObjectName(QStringLiteral("label_5"));
         label_5->setMaximumSize(QSize(90, 30));
         label_5->setScaledContents(false);
 
         verticalLayout->addWidget(label_5);
 
-        borderWidth_2 = new QSpinBox(layoutWidget2);
+        borderWidth_2 = new QSpinBox(layoutWidget1);
         borderWidth_2->setObjectName(QStringLiteral("borderWidth_2"));
         borderWidth_2->setMaximumSize(QSize(90, 30));
         borderWidth_2->setMinimum(0);
@@ -195,50 +268,41 @@ public:
 
         verticalLayout_3->addWidget(widget_line);
 
-        layoutWidget3 = new QWidget(centralWidget);
-        layoutWidget3->setObjectName(QStringLiteral("layoutWidget3"));
-        layoutWidget3->setGeometry(QRect(0, 10, 91, 131));
-        verticalLayout_2 = new QVBoxLayout(layoutWidget3);
-        verticalLayout_2->setSpacing(6);
-        verticalLayout_2->setContentsMargins(11, 11, 11, 11);
-        verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
-        verticalLayout_2->setContentsMargins(0, 0, 0, 0);
-        m_square = new QPushButton(layoutWidget3);
-        m_square->setObjectName(QStringLiteral("m_square"));
-        m_square->setEnabled(true);
-        m_square->setMaximumSize(QSize(90, 40));
-        m_square->setCheckable(false);
 
-        verticalLayout_2->addWidget(m_square);
-
-        m_line = new QPushButton(layoutWidget3);
-        m_line->setObjectName(QStringLiteral("m_line"));
-        m_line->setMaximumSize(QSize(90, 40));
-
-        verticalLayout_2->addWidget(m_line);
-
-        m_move = new QPushButton(layoutWidget3);
-        m_move->setObjectName(QStringLiteral("m_move"));
-        m_move->setMaximumSize(QSize(90, 40));
-
-        verticalLayout_2->addWidget(m_move);
+        gridLayout_2->addLayout(verticalLayout_3, 1, 0, 3, 2);
 
         MainWindow->setCentralWidget(centralWidget);
+        statusBar = new QStatusBar(MainWindow);
+        statusBar->setObjectName(QStringLiteral("statusBar"));
+        MainWindow->setStatusBar(statusBar);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
         menuBar->setGeometry(QRect(0, 0, 1200, 21));
         menuFile = new QMenu(menuBar);
         menuFile->setObjectName(QStringLiteral("menuFile"));
+        menuTools = new QMenu(menuBar);
+        menuTools->setObjectName(QStringLiteral("menuTools"));
+        menuHelp = new QMenu(menuBar);
+        menuHelp->setObjectName(QStringLiteral("menuHelp"));
+        menuEdit = new QMenu(menuBar);
+        menuEdit->setObjectName(QStringLiteral("menuEdit"));
         MainWindow->setMenuBar(menuBar);
-        statusBar = new QStatusBar(MainWindow);
-        statusBar->setObjectName(QStringLiteral("statusBar"));
-        MainWindow->setStatusBar(statusBar);
 
         menuBar->addAction(menuFile->menuAction());
+        menuBar->addAction(menuEdit->menuAction());
+        menuBar->addAction(menuTools->menuAction());
+        menuBar->addAction(menuHelp->menuAction());
         menuFile->addAction(actionOpen);
         menuFile->addAction(actionSave);
+        menuTools->addAction(actionAdd_tad);
+        menuHelp->addAction(actionInfo);
+        menuEdit->addAction(actionDelete_Item);
+        menuEdit->addAction(actionSelect_all);
 
         retranslateUi(MainWindow);
+
+        tabWidget->setCurrentIndex(0);
+
 
         QMetaObject::connectSlotsByName(MainWindow);
     } // setupUi
@@ -248,19 +312,27 @@ public:
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "Graphic Editor", nullptr));
         actionOpen->setText(QApplication::translate("MainWindow", "Open", nullptr));
         actionSave->setText(QApplication::translate("MainWindow", "Save", nullptr));
-        borderColor_2->setText(QString());
-        label->setText(QApplication::translate("MainWindow", "Rect color", nullptr));
-        lineColor->setText(QString());
-        label_2->setText(QApplication::translate("MainWindow", "Border color", nullptr));
-        borderColor->setText(QString());
-        label_4->setText(QApplication::translate("MainWindow", "Border width", nullptr));
-        label_3->setText(QApplication::translate("MainWindow", "Line color", nullptr));
-        borderColor_3->setText(QString());
-        label_5->setText(QApplication::translate("MainWindow", "Line width", nullptr));
+        actionAdd_tad->setText(QApplication::translate("MainWindow", "Add tad", nullptr));
+        actionInfo->setText(QApplication::translate("MainWindow", "Information", nullptr));
+        actionSelect_all->setText(QApplication::translate("MainWindow", "Select all", nullptr));
+        actionDelete_Item->setText(QApplication::translate("MainWindow", "Delete Item", nullptr));
         m_square->setText(QApplication::translate("MainWindow", "Rect", nullptr));
         m_line->setText(QApplication::translate("MainWindow", "Line", nullptr));
         m_move->setText(QApplication::translate("MainWindow", "Edit", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("MainWindow", "Main", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("MainWindow", "Subsidiary", nullptr));
+        label->setText(QApplication::translate("MainWindow", "Rect", nullptr));
+        lineColor->setText(QString());
+        label_2->setText(QApplication::translate("MainWindow", "Border", nullptr));
+        borderColor->setText(QString());
+        label_4->setText(QApplication::translate("MainWindow", "Width", nullptr));
+        label_3->setText(QApplication::translate("MainWindow", "Line", nullptr));
+        borderColor_3->setText(QString());
+        label_5->setText(QApplication::translate("MainWindow", "Width", nullptr));
         menuFile->setTitle(QApplication::translate("MainWindow", "File", nullptr));
+        menuTools->setTitle(QApplication::translate("MainWindow", "Tools", nullptr));
+        menuHelp->setTitle(QApplication::translate("MainWindow", "Help", nullptr));
+        menuEdit->setTitle(QApplication::translate("MainWindow", "Edit", nullptr));
     } // retranslateUi
 
 };

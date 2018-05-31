@@ -64,7 +64,6 @@ RESOURCES += \
     res.qrc
 
 DISTFILES += \
-    Resources/grid-background.jpg \
     Resources/cube.svg \
     Resources/paint-palette.svg \
     Resources/pen.svg \

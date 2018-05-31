@@ -1,4 +1,4 @@
- #ifndef WORKPLACE_H
+#ifndef WORKPLACE_H
 #define WORKPLACE_H
 
 #include <QObject>
@@ -13,14 +13,17 @@ class WorkPlace : public QGraphicsScene
 {
 	Q_OBJECT
 
-	Q_PROPERTY(int currentAction READ currentAction WRITE setCurrentAction NOTIFY currentActionChanged)
-	Q_PROPERTY(QPointF previousPosition READ previousPosition WRITE setPreviousPosition NOTIFY previousPositionChanged)
+	Q_PROPERTY( int currentAction READ currentAction WRITE setCurrentAction NOTIFY
+				currentActionChanged )
+	Q_PROPERTY( QPointF previousPosition READ previousPosition WRITE setPreviousPosition NOTIFY
+				previousPositionChanged )
 
 public:
-	explicit WorkPlace(QObject *parent = 0);
+	explicit WorkPlace( QObject* parent = 0 );
 	~WorkPlace();
 
-	enum ActionTypes {
+	enum ActionTypes
+	{
 		DefaultType,
 		LineType,
 		RectangleType,
@@ -31,21 +34,21 @@ public:
 	QColor color_1() const;
 	QPointF previousPosition() const;
 
-	void setCurrentAction(const int type);
-	void setPreviousPosition(const QPointF previousPosition);
+	void setCurrentAction( const int type );
+	void setPreviousPosition( const QPointF previousPosition );
 
 signals:
 	void previousPositionChanged();
-	void currentActionChanged(int);
-	void signalSelectItem(QGraphicsItem* item);
-	void signalNewSelectItem(QGraphicsItem* item);
+	void currentActionChanged( int );
+	void signalSelectItem( QGraphicsItem* item );
+	void signalNewSelectItem( QGraphicsItem* item );
 
 protected:
-    void mousePressEvent(QGraphicsSceneMouseEvent* event) override;
-    void mouseMoveEvent(QGraphicsSceneMouseEvent* event) override;
-    void mouseReleaseEvent(QGraphicsSceneMouseEvent* event) override;
+	void mousePressEvent( QGraphicsSceneMouseEvent* event ) override;
+	void mouseMoveEvent( QGraphicsSceneMouseEvent* event ) override;
+	void mouseReleaseEvent( QGraphicsSceneMouseEvent* event ) override;
 //	void mouseDoubleClickEvent(QGraphicsSceneMouseEvent* event) override;
-	void keyPressEvent(QKeyEvent* event) override;
+	void keyPressEvent( QKeyEvent* event ) override;
 
 private slots:
 	void deselectItems();
@@ -53,7 +56,7 @@ private slots:
 //	void newRectangle(Rectangle* rect);
 
 public slots:
-	void slotMove(QGraphicsItem* signalOwner, qreal dx, qreal dy);
+	void slotMove( QGraphicsItem* signalOwner, qreal dx, qreal dy );
 
 private:
 
@@ -62,7 +65,7 @@ private:
 	int					m_currentAction;
 	int					m_previousAction;
 	QPointF				m_previousPosition;
-    bool				m_leftMouseButtonPressed;
+	bool				m_leftMouseButtonPressed;
 
 
 	QColor m_colorW;

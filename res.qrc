@@ -1,12 +1,14 @@
 <RCC>
     <qresource prefix="/icon">
         <file>Resources/cube.svg</file>
-        <file>Resources/grid-background.jpg</file>
         <file>Resources/paint-palette.svg</file>
         <file>Resources/pen.svg</file>
         <file>Resources/square.svg</file>
         <file>Resources/vector.svg</file>
         <file>Resources/cursor.svg</file>
         <file>Resources/spiral.svg</file>
+        <file>Resources/grid-background1.jpg</file>
+        <file>Resources/Help.jpg</file>
+        <file>Resources/Cry.jpg</file>
     </qresource>
 </RCC>

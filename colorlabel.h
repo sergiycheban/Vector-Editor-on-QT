@@ -9,17 +9,17 @@ class ColorLabel : public QLabel
 {
 	Q_OBJECT
 public:
-	explicit ColorLabel(QWidget *parent = 0);
+	explicit ColorLabel( QWidget* parent = 0 );
 	~ColorLabel();
 
 protected:
-	void mousePressEvent(QMouseEvent *event);
+	void mousePressEvent( QMouseEvent* event );
 
 signals:
 	void clicked();
 
 public slots:
-	void setColor(const QColor &color);
+	void setColor( const QColor& color );
 };
 
 #endif // CLICKABLELABEL_H
