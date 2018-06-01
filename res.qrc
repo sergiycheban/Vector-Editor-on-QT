@@ -10,5 +10,8 @@
         <file>Resources/grid-background1.jpg</file>
         <file>Resources/Help.jpg</file>
         <file>Resources/Cry.jpg</file>
+        <file>Resources/select.svg</file>
+        <file>Resources/square-3.svg</file>
+        <file>Resources/vector-3.svg</file>
     </qresource>
 </RCC>

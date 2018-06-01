@@ -21,7 +21,7 @@ SvgSave::~SvgSave()
 
 QList<Rectangle*> SvgSave::getRectangles()
 {
-	QList<Rectangle*> rectList;
+    QList<Rectangle*> rectList;
 	return rectList;
 }
 
@@ -84,7 +84,7 @@ QList<QGraphicsItem*> SvgSave::getElements( const QString filename )
 
 		if ( !rectangle.isNull() )
 		{
-			Rectangle* rect = new Rectangle();
+            Rectangle* rect = new Rectangle();
 			auto gElement = gNode.toElement();
 			rect->setRect( rectangle.attribute( "x" ).toInt(),
 						   rectangle.attribute( "y" ).toInt(),

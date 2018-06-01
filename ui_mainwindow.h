@@ -61,6 +61,7 @@ public:
     ColorLabel *borderColor;
     QLabel *label_4;
     QSpinBox *borderWidth;
+    QPushButton *pushButton_2;
     QSpacerItem *verticalSpacer;
     QWidget *widget_line;
     QWidget *layoutWidget1;
@@ -83,8 +84,8 @@ public:
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
         MainWindow->setWindowModality(Qt::NonModal);
         MainWindow->setEnabled(true);
-        MainWindow->resize(1200, 620);
-        MainWindow->setMaximumSize(QSize(1200, 620));
+        MainWindow->resize(1300, 620);
+        MainWindow->setMaximumSize(QSize(1300, 620));
         QFont font;
         font.setKerning(true);
         MainWindow->setFont(font);
@@ -115,20 +116,20 @@ public:
         m_square = new QPushButton(centralWidget);
         m_square->setObjectName(QStringLiteral("m_square"));
         m_square->setEnabled(true);
-        m_square->setMaximumSize(QSize(90, 30));
+        m_square->setMaximumSize(QSize(90, 29));
         m_square->setCheckable(false);
 
         verticalLayout_2->addWidget(m_square);
 
         m_line = new QPushButton(centralWidget);
         m_line->setObjectName(QStringLiteral("m_line"));
-        m_line->setMaximumSize(QSize(90, 30));
+        m_line->setMaximumSize(QSize(90, 29));
 
         verticalLayout_2->addWidget(m_line);
 
         m_move = new QPushButton(centralWidget);
         m_move->setObjectName(QStringLiteral("m_move"));
-        m_move->setMaximumSize(QSize(90, 30));
+        m_move->setMaximumSize(QSize(90, 29));
 
         verticalLayout_2->addWidget(m_move);
 
@@ -139,26 +140,26 @@ public:
         tabWidget->setObjectName(QStringLiteral("tabWidget"));
         tabWidget->setAutoFillBackground(false);
         tabWidget->setTabPosition(QTabWidget::North);
-        tabWidget->setTabShape(QTabWidget::Triangular);
+        tabWidget->setTabShape(QTabWidget::Rounded);
         tabWidget->setIconSize(QSize(32, 32));
         tabWidget->setElideMode(Qt::ElideMiddle);
         tabWidget->setUsesScrollButtons(false);
         tabWidget->setDocumentMode(false);
         tabWidget->setTabsClosable(true);
-        tabWidget->setMovable(true);
+        tabWidget->setMovable(false);
         tab = new QWidget();
         tab->setObjectName(QStringLiteral("tab"));
         graphicsView = new QGraphicsView(tab);
         graphicsView->setObjectName(QStringLiteral("graphicsView"));
-        graphicsView->setGeometry(QRect(0, 0, 1091, 529));
-        graphicsView->setMaximumSize(QSize(16777215, 529));
+        graphicsView->setGeometry(QRect(0, 0, 1176, 538));
+        graphicsView->setMaximumSize(QSize(1176, 538));
         tabWidget->addTab(tab, QString());
         tab_2 = new QWidget();
         tab_2->setObjectName(QStringLiteral("tab_2"));
         graphicsView_3 = new QGraphicsView(tab_2);
         graphicsView_3->setObjectName(QStringLiteral("graphicsView_3"));
-        graphicsView_3->setGeometry(QRect(0, 0, 1091, 529));
-        graphicsView_3->setMaximumSize(QSize(16777215, 529));
+        graphicsView_3->setGeometry(QRect(0, 0, 1176, 538));
+        graphicsView_3->setMaximumSize(QSize(1176, 538));
         tabWidget->addTab(tab_2, QString());
 
         gridLayout_2->addWidget(tabWidget, 0, 2, 4, 1);
@@ -170,7 +171,7 @@ public:
         widget_rect->setObjectName(QStringLiteral("widget_rect"));
         layoutWidget = new QWidget(widget_rect);
         layoutWidget->setObjectName(QStringLiteral("layoutWidget"));
-        layoutWidget->setGeometry(QRect(0, 0, 71, 171));
+        layoutWidget->setGeometry(QRect(0, 0, 92, 182));
         verticalLayout_4 = new QVBoxLayout(layoutWidget);
         verticalLayout_4->setSpacing(6);
         verticalLayout_4->setContentsMargins(11, 11, 11, 11);
@@ -215,6 +216,12 @@ public:
         borderWidth->setValue(1);
 
         verticalLayout_4->addWidget(borderWidth);
+
+        pushButton_2 = new QPushButton(layoutWidget);
+        pushButton_2->setObjectName(QStringLiteral("pushButton_2"));
+        pushButton_2->setMaximumSize(QSize(90, 30));
+
+        verticalLayout_4->addWidget(pushButton_2);
 
         verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
@@ -277,7 +284,7 @@ public:
         MainWindow->setStatusBar(statusBar);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 1200, 21));
+        menuBar->setGeometry(QRect(0, 0, 1300, 21));
         menuFile = new QMenu(menuBar);
         menuFile->setObjectName(QStringLiteral("menuFile"));
         menuTools = new QMenu(menuBar);
@@ -316,9 +323,9 @@ public:
         actionInfo->setText(QApplication::translate("MainWindow", "Information", nullptr));
         actionSelect_all->setText(QApplication::translate("MainWindow", "Select all", nullptr));
         actionDelete_Item->setText(QApplication::translate("MainWindow", "Delete Item", nullptr));
-        m_square->setText(QApplication::translate("MainWindow", "Rect", nullptr));
-        m_line->setText(QApplication::translate("MainWindow", "Line", nullptr));
-        m_move->setText(QApplication::translate("MainWindow", "Edit", nullptr));
+        m_square->setText(QApplication::translate("MainWindow", "Rectangle", nullptr));
+        m_line->setText(QApplication::translate("MainWindow", "Line        ", nullptr));
+        m_move->setText(QApplication::translate("MainWindow", "Edit        ", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("MainWindow", "Main", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("MainWindow", "Subsidiary", nullptr));
         label->setText(QApplication::translate("MainWindow", "Rect", nullptr));
@@ -326,6 +333,7 @@ public:
         label_2->setText(QApplication::translate("MainWindow", "Border", nullptr));
         borderColor->setText(QString());
         label_4->setText(QApplication::translate("MainWindow", "Width", nullptr));
+        pushButton_2->setText(QApplication::translate("MainWindow", "Shadow", nullptr));
         label_3->setText(QApplication::translate("MainWindow", "Line", nullptr));
         borderColor_3->setText(QString());
         label_5->setText(QApplication::translate("MainWindow", "Width", nullptr));

@@ -97,16 +97,18 @@ void WorkPlace::mousePressEvent( QGraphicsSceneMouseEvent* event )
 					 && !( event->button() & Qt::MiddleButton ) )
 				{
 					deselectItems();
-					Rectangle* rectangle = new Rectangle();
+                    Rectangle* rectangle = new Rectangle();
 					currentItem = rectangle;
 					addItem( currentItem );
-					connect( rectangle, &Rectangle::clicked, this, &WorkPlace::signalSelectItem );
-					connect( rectangle, &Rectangle::signalMove, this, &WorkPlace::slotMove );
+                    connect( rectangle, &Rectangle::clicked, this, &WorkPlace::signalSelectItem );
+                    connect( rectangle, &Rectangle::signalMove, this, &WorkPlace::slotMove );
 					emit signalNewSelectItem( rectangle );
 				}
 
 				break;
-			}
+            }
+
+
 
 		default:
 			{
@@ -141,7 +143,7 @@ void WorkPlace::mouseMoveEvent( QGraphicsSceneMouseEvent* event )
 				{
 					auto dx = event->scenePos().x() - m_previousPosition.x();
 					auto dy = event->scenePos().y() - m_previousPosition.y();
-					Rectangle* rectangle = qgraphicsitem_cast<Rectangle*>( currentItem );
+                    Rectangle* rectangle = qgraphicsitem_cast<Rectangle*>( currentItem );
 					rectangle->setRect( ( dx > 0 ) ? m_previousPosition.x() : event->scenePos().x(),
 										( dy > 0 ) ? m_previousPosition.y() : event->scenePos().y(),
 										qAbs( dx ), qAbs( dy ) );
@@ -149,6 +151,7 @@ void WorkPlace::mouseMoveEvent( QGraphicsSceneMouseEvent* event )
 
 				break;
 			}
+
 
 		default:
 			{
@@ -181,6 +184,7 @@ void WorkPlace::mouseReleaseEvent( QGraphicsSceneMouseEvent* event )
 				break;
 			}
 
+
 		default:
 			{
 				QGraphicsScene::mouseReleaseEvent( event );
@@ -210,7 +214,6 @@ void WorkPlace::keyPressEvent( QKeyEvent* event )
                 if ( event->modifiers() & Qt::CTRL )
                 {
 
-                    qDebug() << "ddasd";
 					foreach ( QGraphicsItem* item, items() )
                     {
 						item->setSelected( true );

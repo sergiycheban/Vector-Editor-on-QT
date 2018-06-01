@@ -12,13 +12,13 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1200</width>
+    <width>1300</width>
     <height>620</height>
    </rect>
   </property>
   <property name="maximumSize">
    <size>
-    <width>1200</width>
+    <width>1300</width>
     <height>620</height>
    </size>
   </property>
@@ -48,11 +48,11 @@
         <property name="maximumSize">
          <size>
           <width>90</width>
-          <height>30</height>
+          <height>29</height>
          </size>
         </property>
         <property name="text">
-         <string>Rect</string>
+         <string>Rectangle</string>
         </property>
         <property name="checkable">
          <bool>false</bool>
@@ -64,11 +64,11 @@
         <property name="maximumSize">
          <size>
           <width>90</width>
-          <height>30</height>
+          <height>29</height>
          </size>
         </property>
         <property name="text">
-         <string>Line</string>
+         <string>Line        </string>
         </property>
        </widget>
       </item>
@@ -77,11 +77,11 @@
         <property name="maximumSize">
          <size>
           <width>90</width>
-          <height>30</height>
+          <height>29</height>
          </size>
         </property>
         <property name="text">
-         <string>Edit</string>
+         <string>Edit        </string>
         </property>
        </widget>
       </item>
@@ -96,7 +96,7 @@
        <enum>QTabWidget::North</enum>
       </property>
       <property name="tabShape">
-       <enum>QTabWidget::Triangular</enum>
+       <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
        <number>0</number>
@@ -120,7 +120,7 @@
        <bool>true</bool>
       </property>
       <property name="movable">
-       <bool>true</bool>
+       <bool>false</bool>
       </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">
@@ -131,14 +131,14 @@
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>1091</width>
-          <height>529</height>
+          <width>1176</width>
+          <height>538</height>
          </rect>
         </property>
         <property name="maximumSize">
          <size>
-          <width>16777215</width>
-          <height>529</height>
+          <width>1176</width>
+          <height>538</height>
          </size>
         </property>
        </widget>
@@ -152,14 +152,14 @@
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>1091</width>
-          <height>529</height>
+          <width>1176</width>
+          <height>538</height>
          </rect>
         </property>
         <property name="maximumSize">
          <size>
-          <width>16777215</width>
-          <height>529</height>
+          <width>1176</width>
+          <height>538</height>
          </size>
         </property>
        </widget>
@@ -175,8 +175,8 @@
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>71</width>
-           <height>171</height>
+           <width>92</width>
+           <height>182</height>
           </rect>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -264,6 +264,19 @@
             </property>
             <property name="value">
              <number>1</number>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton_2">
+            <property name="maximumSize">
+             <size>
+              <width>90</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Shadow</string>
             </property>
            </widget>
           </item>
@@ -384,7 +397,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1200</width>
+     <width>1300</width>
      <height>21</height>
     </rect>
    </property>

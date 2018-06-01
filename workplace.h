@@ -27,7 +27,7 @@ public:
 		DefaultType,
 		LineType,
 		RectangleType,
-		SelectionType
+        SelectionType
 	};
 
 	int currentAction() const;

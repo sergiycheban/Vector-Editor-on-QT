@@ -16,6 +16,7 @@
 #include <QWheelEvent>
 #include <QtMath>
 #include <QScrollBar>
+#include <QGraphicsDropShadowEffect>
 
 #include "workplace.h"
 #include "rectangle.h"
@@ -26,29 +27,29 @@
 
 MainWindow::MainWindow( QWidget* parent ) :
 	QMainWindow( parent ),
-	m_ui( new Ui::MainWindow )
+    m_ui( new Ui::MainWindow )
 {
 	m_ui->setupUi( this );
 
 	styleSheets();
 
-	setColor( QColor( Qt::yellow ) );
+    setColor( QColor(Qt::cyan));
 	setBorderWidth( 2 );
 	setLineColor( QColor( Qt::red ) );
 	setLineWidth( 1 );
-	setBorderColor( Qt::black );
+    setBorderColor( Qt::black );
 
 	workplaceScene = new WorkPlace( this );
-    workplaceScene->setSceneRect( 0, 0, 1200, 620 );
+    workplaceScene->setSceneRect( 0, 0, 1300, 620 );
 
 	workplaceScene_2 = new WorkPlace( this );
-	workplaceScene_2->setSceneRect( 0, 0, 1200, 620 );
+    workplaceScene_2->setSceneRect( 0, 0, 1300, 620 );
 
 	workplaceScene_3 = new WorkPlace( this );
-    workplaceScene_3->setSceneRect( 0, 0, 1200, 620 );
-    this->resize( 1200, 620 );
-    this->setFixedSize( 1200, 620 );
-	setStyleSheet( "QMenu::item:selected {border: 1px solid black;}" );
+    workplaceScene_3->setSceneRect( 0, 0, 1300, 620 );
+    this->resize( 1300, 620 );
+    this->setFixedSize( 1300, 620 );
+    setStyleSheet( "QMenu::item:selected {border: 1px solid black;}" );
 
 	m_ui->graphicsView->setScene( workplaceScene );
 
@@ -56,7 +57,7 @@ MainWindow::MainWindow( QWidget* parent ) :
 
     scene = new QGraphicsScene( this );
     scene->setItemIndexMethod( QGraphicsScene::NoIndex );
-	connects();
+    connects();
 
 	m_ui->widget_line->hide();
 	m_ui->widget_rect->hide();
@@ -136,7 +137,8 @@ void MainWindow::connects()
 	connect( m_ui->m_line, &QToolButton::clicked, [ = ]()
 	{
 		workplaceScene->setCurrentAction( WorkPlace::LineType );
-	} );
+    } );
+
 
 	connect( workplaceScene, &WorkPlace::signalSelectItem, this, &MainWindow::selectItem );
 
@@ -187,45 +189,45 @@ void MainWindow::connects()
 
 }
 
+void MainWindow::drawBackground()
+{
+    for (int x=0; x<=3000; x+=50)
+        workplaceScene->addLine(x,0,x,3000, QPen(Qt::green));
+
+    for (int y=0; y<=3000; y+=50)
+        workplaceScene->addLine(0,y,3000,y, QPen(Qt::green));
+}
+
 void MainWindow::styleSheets()
 {
 
 	setWindowIcon( QIcon( ":/icon/Resources/cube.svg" ) );
 
-	QPixmap bkgnd( ":/icon/Resources/grid-background1.jpg" );
-	bkgnd = bkgnd.scaled( this->size(), Qt::IgnoreAspectRatio );
-	QPalette palette;
-	palette.setBrush( QPalette::Background, bkgnd );
-	this->setPalette( palette );
+//	QPixmap bkgnd( ":/icon/Resources/grid-background1.jpg" );
+//	bkgnd = bkgnd.scaled( this->size(), Qt::IgnoreAspectRatio );
+//	QPalette palette;
+//	palette.setBrush( QPalette::Background, bkgnd );
+//	this->setPalette( palette );
 
-	QPixmap pixmapReset( ":/icon/Resources/square.svg" );
+    QPixmap pixmapReset( ":/icon/Resources/square-3.svg" );
 	QIcon ButtonIconReset( pixmapReset );
 	m_ui->m_square->setIcon( ButtonIconReset );
     m_ui->m_square->setIconSize( QSize( 30, 30 ) );
-    m_ui->m_square->setStyleSheet( "background-color:#571835;color:white;" );
+    m_ui->m_square->setStyleSheet( "color:black;border:none" );
 
-	QPixmap pixmapSearch( ":/icon/Resources/pen.svg" );
+    QPixmap pixmapSearch( ":/icon/Resources/vector-3.svg" );
 	QIcon ButtonIconSearch( pixmapSearch );
 	m_ui->m_line->setIcon( ButtonIconSearch );
-	m_ui->m_line->setIconSize( QSize( 30, 30 ) );
-	m_ui->m_line->setStyleSheet( "background-color:#571835;color:white;" );
+    m_ui->m_line->setIconSize( QSize( 30, 30 ) );
+    m_ui->m_line->setStyleSheet( "color:black;border:none" );
 
-	QPixmap pixmapClose( ":/icon/Resources/vector.svg" );
+    QPixmap pixmapClose( ":/icon/Resources/select.svg" );
 	QIcon ButtonIconClose( pixmapClose );
 	m_ui->m_move->setIcon( ButtonIconClose );
-	m_ui->m_move->setIconSize( QSize( 30, 30 ) );
-	m_ui->m_move->setStyleSheet( "background-color:#571835;color:white;");
-
-	m_ui->label->setStyleSheet( "color:white;" );
-	m_ui->label_2->setStyleSheet( "color:white;" );
-	m_ui->label_3->setStyleSheet( "color:white;" );
-	m_ui->label_4->setStyleSheet( "color:white;" );
-	m_ui->label_5->setStyleSheet( "color:white;" );
-
-	QFont font( "Courier New" );
-	font.setStyleHint( QFont::Monospace );
-	font.setPixelSize( 14 );
-	QApplication::setFont( font );
+    m_ui->m_move->setIconSize( QSize( 30, 30 ) );
+    m_ui->m_move->setStyleSheet( "color:black;border:none");
+    QFont newFont("AnyStyle", 8, QFont::DemiBold, false);
+    QApplication::setFont(newFont);
 
 }
 
@@ -238,7 +240,7 @@ void MainWindow::setLineColor( const QColor& color )
 	if ( currentLine != nullptr )
 	{
 		QPen pen( color, currentLine->pen().width() );
-		currentLine->setPen( pen );
+        currentLine->setPen( pen );
 	}
 
 	emit lineColorChanged( m_lineColor );
@@ -265,10 +267,8 @@ void MainWindow::setColor( const QColor& color )
 
 	if ( currentRectangle != nullptr )
 	{
-		currentRectangle->setBrush( QBrush( m_color ) );
-	}
-
-	qDebug() << "color =" << " " << color;
+        currentRectangle->setBrush( QBrush( m_color ) );
+    }
 	emit colorChanged( m_color );
 }
 
@@ -394,7 +394,7 @@ void MainWindow::selectNewItem( QGraphicsItem* item )
 	{
 		case QGraphicsRectItem::Type:
 			{
-				Rectangle* rect = qgraphicsitem_cast<Rectangle*>( item );
+                Rectangle* rect = qgraphicsitem_cast<Rectangle*>( item );
 				newRectangle( rect );
 				break;
 			}
@@ -417,7 +417,7 @@ void MainWindow::selectItem( QGraphicsItem* item )
 	{
 		case QGraphicsRectItem::Type:
 			{
-				Rectangle* rect = qgraphicsitem_cast<Rectangle*>( item );
+                Rectangle* rect = qgraphicsitem_cast<Rectangle*>( item );
 				loadRectangle( rect );
 				break;
 			}
@@ -451,52 +451,84 @@ void MainWindow::checkSelections()
     }
 }
 
-//void MainWindow::wheelEvent(QWheelEvent *event)
-//{
-//    qDebug() << "event " << event->delta();
-//    if( event->modifiers() & Qt::ControlModifier )
-//    {
-//        if ( m_index == 0 )
-//        {
-//            if( event->modifiers() & Qt::ControlModifier )
-//            {
-//                m_ui->graphicsView->setTransformationAnchor(QGraphicsView::AnchorViewCenter);
-//                double scaleFactor = 1.15;
-
-//                if( event->delta() > 0 )
-//                     m_ui->graphicsView->scale(scaleFactor,scaleFactor);
-//                else
-//                    m_ui->graphicsView->scale(1/scaleFactor,1/scaleFactor);
-//            }
-//        }
-//        if ( m_index == 1 )
-//        {
-//            if( event->modifiers() & Qt::ControlModifier )
-//            {
-//                m_ui->graphicsView_3->setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
-//                double scaleFactor = 1.15;
-
-//                if( event->delta() > 0 )
-//                    m_ui->graphicsView_3->scale(scaleFactor,scaleFactor);
-//                else
-//                    m_ui->graphicsView_3->scale(1/scaleFactor,1/scaleFactor);
-//            }
-//        }
-//        if ( m_index == 2 )
-//        {
-//            if( event->modifiers() & Qt::ControlModifier )
-//            {
-//                m_view->setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
-//                double scaleFactor = 1.15;
-
-//                if( event->delta() > 0 )
-//                    m_view->scale(scaleFactor,scaleFactor);
-//                else
-//                    m_view->scale(1/scaleFactor,1/scaleFactor);
-//            }
-//        }
-//    }
-//}
+void MainWindow::wheelEvent(QWheelEvent *event)
+{
+    if( event->modifiers() & Qt::ControlModifier )
+    {
+        if ( m_index == 0 )
+        {
+            if( event->modifiers() & Qt::ControlModifier )
+            {
+                m_ui->graphicsView->setTransformationAnchor(QGraphicsView::AnchorViewCenter);
+                double scaleFactor = 1.15;
+                QRect widgetRect = m_ui->graphicsView->geometry();
+                if( event->delta() > 0 )
+                {
+                    if( m_ui->graphicsView->transform().scale(scaleFactor,scaleFactor).mapRect(widgetRect).width() <= 3168 )
+                    {
+                        m_ui->graphicsView->scale(scaleFactor,scaleFactor);
+                    qDebug() << m_ui->graphicsView->transform().scale(scaleFactor,scaleFactor).mapRect(widgetRect).width();
+                    }
+                }
+                else
+                {
+                    if( m_ui->graphicsView->transform().scale(scaleFactor,scaleFactor).mapRect(widgetRect).width() >= 585 )
+                    {
+                        m_ui->graphicsView->scale(1/scaleFactor,1/scaleFactor);
+                        qDebug() << m_ui->graphicsView->transform().scale(scaleFactor,scaleFactor).mapRect(widgetRect).width();
+                    }
+                }
+            }
+        }
+        if ( m_index == 1 )
+        {
+            if( event->modifiers() & Qt::ControlModifier )
+            {
+                m_ui->graphicsView_3->setTransformationAnchor(QGraphicsView::AnchorViewCenter);
+                double scaleFactor = 1.15;
+                QRect widgetRect = m_ui->graphicsView_3->geometry();
+                if( event->delta() > 0 )
+                {
+                    if( m_ui->graphicsView_3->transform().scale(scaleFactor,scaleFactor).mapRect(widgetRect).width() <= 3168 )
+                    {
+                        m_ui->graphicsView_3->scale(scaleFactor,scaleFactor);
+                    qDebug() << m_ui->graphicsView_3->transform().scale(scaleFactor,scaleFactor).mapRect(widgetRect).width();
+                    }
+                }
+                else
+                {
+                    if( m_ui->graphicsView_3->transform().scale(scaleFactor,scaleFactor).mapRect(widgetRect).width() >= 585 )
+                    {
+                        m_ui->graphicsView_3->scale(1/scaleFactor,1/scaleFactor);
+                    }
+                }
+            }
+        }
+        if ( m_index == 2 )
+        {
+            if( event->modifiers() & Qt::ControlModifier )
+            {
+                m_view->setTransformationAnchor(QGraphicsView::AnchorViewCenter);
+                double scaleFactor = 1.15;
+                QRect widgetRect = m_view->geometry();
+                if( event->delta() > 0 )
+                {
+                    if( m_view->transform().scale(scaleFactor,scaleFactor).mapRect(widgetRect).width() <= 3168 )
+                    {
+                        m_view->scale(scaleFactor,scaleFactor);
+                    }
+                }
+                else
+                {
+                    if( m_view->transform().scale(scaleFactor,scaleFactor).mapRect(widgetRect).width() >= 585 )
+                    {
+                        m_view->scale(1/scaleFactor,1/scaleFactor);
+                    }
+                }
+            }
+        }
+    }
+}
 
 void MainWindow::on_m_line_clicked()
 {
@@ -569,7 +601,7 @@ void MainWindow::on_actionOpen_triggered()
 
 			case QGraphicsRectItem::Type:
 				{
-					Rectangle* rect = qgraphicsitem_cast<Rectangle*>( item );
+                    Rectangle* rect = qgraphicsitem_cast<Rectangle*>( item );
 
 					if ( m_index == 0 )
 					{
@@ -608,22 +640,51 @@ void MainWindow::on_actionSave_triggered()
 	path = newPath;
 
 	QSvgGenerator generator;
-	generator.setFileName( path );
-	generator.setSize( QSize( workplaceScene->width(), workplaceScene->height() ) );
-	generator.setViewBox( QRect( 0, 0, workplaceScene->width(), workplaceScene->height() ) );
+    if ( m_index == 0 )
+    {
+        generator.setFileName( path );
+        generator.setSize( QSize( workplaceScene->width(), workplaceScene->height() ) );
+        generator.setViewBox( QRect( 0, 0, workplaceScene->width(), workplaceScene->height() ) );
+    }
+
+    if ( m_index == 1 )
+    {
+        generator.setFileName( path );
+        generator.setSize( QSize( workplaceScene_2->width(), workplaceScene_2->height() ) );
+        generator.setViewBox( QRect( 0, 0, workplaceScene_2->width(), workplaceScene_2->height() ) );
+    }
+
+    if ( m_index == 2 )
+    {
+        generator.setFileName( path );
+        generator.setSize( QSize( workplaceScene_3->width(), workplaceScene_3->height() ) );
+        generator.setViewBox( QRect( 0, 0, workplaceScene_3->width(), workplaceScene_3->height() ) );
+    }
 	generator.setTitle( trUtf8( "Vector Editor" ) );
 	generator.setDescription( trUtf8( "File created by Vector Editor." ) );
 
 	QPainter painter;
 	painter.begin( &generator );
-	workplaceScene->render( &painter );
+    if ( m_index == 0 )
+    {
+        workplaceScene->render( &painter );
+    }
+
+    if ( m_index == 1 )
+    {
+        workplaceScene_2->render( &painter );
+    }
+
+    if ( m_index == 2 )
+    {
+        workplaceScene_3->render( &painter );
+    }
 	painter.end();
 }
 
 
 void MainWindow::on_tabWidget_tabBarClicked( int index )
 {
-	qDebug() << index;
 	m_index = index;
 }
 
@@ -675,7 +736,6 @@ void MainWindow::on_actionInfo_triggered()
 //    qDebug () << value;
 //    m_ui->graphicsView->setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
 //    double scaleFactor = 1.04;
-
 //    if( value > 0 )
 //         m_ui->graphicsView->scale(scaleFactor,scaleFactor);
 //    else
@@ -684,3 +744,15 @@ void MainWindow::on_actionInfo_triggered()
 //    }
 
 //}
+
+void MainWindow::on_pushButton_2_clicked()
+{
+    if ( currentRectangle != nullptr )
+    {
+        QGraphicsDropShadowEffect * effect = new QGraphicsDropShadowEffect();
+        effect->setBlurRadius(50);
+
+        currentRectangle->setGraphicsEffect(effect);
+        workplaceScene->addItem(currentRectangle);
+    }
+}

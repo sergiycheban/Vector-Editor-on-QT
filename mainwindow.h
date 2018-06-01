@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QGraphicsScene>
 #include <QWidget>
+#include <QUndoStack>
 
 
 #include <workplace.h>
@@ -43,15 +44,16 @@ signals:
 
 
 public slots:
-	void connects();
+    void connects();
+    void drawBackground();
 	void styleSheets();
 	void setLineColor( const QColor& color );
 	void setLineWidth( const int& width );
 	void setColor( const QColor& color );
 	void setBorderWidth( const int& width );
 	void setBorderColor( const QColor& color );
-	void newRectangle( Rectangle* rect );
-	void loadRectangle( Rectangle* rect );
+    void newRectangle( Rectangle* rect );
+    void loadRectangle( Rectangle* rect );
 	void newLine( Line* line );
 	void loadLine( Line* line );
 	void setVisible( bool visible ) override;
@@ -59,7 +61,7 @@ public slots:
 	void selectNewItem( QGraphicsItem* item );
 	void selectItem( QGraphicsItem* item );
     void checkSelections();
-    //virtual void wheelEvent(QWheelEvent* event) override;
+    virtual void wheelEvent(QWheelEvent* event) override;
 
 
 private slots:
@@ -79,6 +81,8 @@ private slots:
 
     void on_actionInfo_triggered();
 
+    void on_pushButton_2_clicked();
+
 private:
     Ui::MainWindow*		m_ui;
     QGraphicsScene*		scene;
@@ -88,21 +92,20 @@ private:
 	QColor				m_borderColor;
     QColor				m_lineColor;
 
-
-	QPointF myOldPos;
-	QPointF newPos;
-
 	QGraphicsRectItem*  rect;
+    QUndoStack* undoStack;
 
 	WorkPlace*			workplaceScene;
 	WorkPlace*			workplaceScene_2;
     WorkPlace*			workplaceScene_3;
 	QString				path;
-	Rectangle*			currentRectangle = nullptr;
+    Rectangle*			currentRectangle = nullptr;
 	Line*				currentLine      = nullptr;
 
-	int					m_index;
+    int					m_index          = 0;
 	bool                m_check          = true;
+
+    bool                checkShadow      = false;
 
 	QGraphicsView*      m_view;
 
