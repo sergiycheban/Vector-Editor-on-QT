@@ -13,5 +13,11 @@
         <file>Resources/select.svg</file>
         <file>Resources/square-3.svg</file>
         <file>Resources/vector-3.svg</file>
+        <file>Resources/add.svg</file>
+        <file>Resources/question.svg</file>
+        <file>Resources/open-folder.svg</file>
+        <file>Resources/save.svg</file>
+        <file>Resources/marquee.svg</file>
+        <file>Resources/cave-painting.svg</file>
     </qresource>
 </RCC>

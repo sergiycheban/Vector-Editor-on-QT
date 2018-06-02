@@ -62,26 +62,29 @@ public slots:
 	void selectItem( QGraphicsItem* item );
     void checkSelections();
     virtual void wheelEvent(QWheelEvent* event) override;
+    void newTab();
 
 
 private slots:
 	void on_m_line_clicked();
 
-	void on_m_square_clicked();
-
-	void on_actionOpen_triggered();
-
-	void on_actionSave_triggered();
+    void on_m_square_clicked();
 
 	void on_tabWidget_tabBarClicked( int index );
 
-	void on_tabWidget_tabCloseRequested( int index );
+    void on_tabWidget_tabCloseRequested( int index );
 
-	void on_actionAdd_tad_triggered();
+    void on_doubleSpinBox_valueChanged(double value);
 
-    void on_actionInfo_triggered();
+    void on_doubleSpinBox_2_valueChanged(double value);
 
-    void on_pushButton_2_clicked();
+    void on_borderWidth_3_valueChanged(int value);
+
+    void on_m_open_clicked();
+
+    void on_m_save_clicked();
+
+    void on_m_question_clicked();
 
 private:
     Ui::MainWindow*		m_ui;
@@ -107,7 +110,9 @@ private:
 
     bool                checkShadow      = false;
 
-	QGraphicsView*      m_view;
+    QGraphicsView*      m_view;
+    int                 m_valueEffect;
+
 
 
 };

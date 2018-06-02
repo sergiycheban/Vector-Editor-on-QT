@@ -59,8 +59,16 @@ MainWindow::MainWindow( QWidget* parent ) :
     scene->setItemIndexMethod( QGraphicsScene::NoIndex );
     connects();
 
-	m_ui->widget_line->hide();
-	m_ui->widget_rect->hide();
+    QToolButton *newTabButton = new QToolButton(this);
+    m_ui->tabWidget->setCornerWidget(newTabButton, Qt::TopLeftCorner);
+    newTabButton->setCursor(Qt::ArrowCursor);
+    newTabButton->setAutoRaise(true);
+    newTabButton->setIcon(QIcon(":/icon/Resources/add.svg"));
+    QObject::connect(newTabButton, SIGNAL(clicked()), this, SLOT(newTab()));
+    newTabButton->setToolTip(tr("Add page"));
+
+//    m_ui->widget_line->hide();
+//    m_ui->widget_rect->hide();
 }
 
 
@@ -89,7 +97,7 @@ QColor MainWindow::lineColor() const
 
 int MainWindow::lineWidth() const
 {
-	return m_lineWidth;
+    return m_lineWidth;
 }
 
 void MainWindow::connects()
@@ -201,15 +209,9 @@ void MainWindow::drawBackground()
 void MainWindow::styleSheets()
 {
 
-	setWindowIcon( QIcon( ":/icon/Resources/cube.svg" ) );
+    setWindowIcon( QIcon( ":/icon/Resources/cave-painting.svg" ) );
 
-//	QPixmap bkgnd( ":/icon/Resources/grid-background1.jpg" );
-//	bkgnd = bkgnd.scaled( this->size(), Qt::IgnoreAspectRatio );
-//	QPalette palette;
-//	palette.setBrush( QPalette::Background, bkgnd );
-//	this->setPalette( palette );
-
-    QPixmap pixmapReset( ":/icon/Resources/square-3.svg" );
+    QPixmap pixmapReset( ":/icon/Resources/marquee.svg" );
 	QIcon ButtonIconReset( pixmapReset );
 	m_ui->m_square->setIcon( ButtonIconReset );
     m_ui->m_square->setIconSize( QSize( 30, 30 ) );
@@ -228,6 +230,27 @@ void MainWindow::styleSheets()
     m_ui->m_move->setStyleSheet( "color:black;border:none");
     QFont newFont("AnyStyle", 8, QFont::DemiBold, false);
     QApplication::setFont(newFont);
+
+
+    QPixmap pixmapCloseQuestion( ":/icon/Resources/question.svg" );
+    QIcon ButtonIconQuestion( pixmapCloseQuestion );
+    m_ui->m_question->setIcon( ButtonIconQuestion );
+    m_ui->m_question->setIconSize( QSize( 30, 30 ) );
+    m_ui->m_question->setStyleSheet( "color:black;border:none");
+
+    QPixmap pixmapCloseSave( ":/icon/Resources/save.svg" );
+    QIcon ButtonIconSave( pixmapCloseSave );
+    m_ui->m_save->setIcon( ButtonIconSave );
+    m_ui->m_save->setIconSize( QSize( 30, 30 ) );
+    m_ui->m_save->setStyleSheet( "color:black;border:none");
+
+
+    QPixmap pixmapCloseOpen( ":/icon/Resources/open-folder.svg" );
+    QIcon ButtonIconOpen( pixmapCloseOpen );
+    m_ui->m_open->setIcon( ButtonIconOpen );
+    m_ui->m_open->setIconSize( QSize( 30, 30 ) );
+    m_ui->m_open->setStyleSheet( "color:black;border:none");
+
 
 }
 
@@ -530,6 +553,28 @@ void MainWindow::wheelEvent(QWheelEvent *event)
     }
 }
 
+void MainWindow::newTab()
+{
+    if ( m_check == true )
+    {
+        m_view = new QGraphicsView( scene );
+        m_view->setScene( workplaceScene_3 );
+        m_ui->tabWidget->addTab( m_view, "Subsidiary" );
+        m_check = false;
+    }
+
+    else
+    {
+        QMessageBox msgBox(QMessageBox::Warning,
+                           "This is the title",
+                           "The maximum number of tabs is 3!",
+                           QMessageBox::Ok, this,
+                           Qt::FramelessWindowHint);
+        msgBox.setStyleSheet("QMessageBox { border: none;font-family: Arial; font-style: normal;  font-size: 12pt;};");
+        msgBox.exec();
+    }
+
+}
 void MainWindow::on_m_line_clicked()
 {
 	m_ui->widget_rect->hide();
@@ -542,104 +587,162 @@ void MainWindow::on_m_square_clicked()
 	m_ui->widget_rect->show();
 }
 
-void MainWindow::on_actionOpen_triggered()
+void MainWindow::on_tabWidget_tabBarClicked( int index )
 {
-	QString newPath = QFileDialog::getOpenFileName( this, trUtf8( "Open SVG" ),
-													path, tr( "SVG files (*.svg)" ) );
+	m_index = index;
+}
 
-	if ( newPath.isEmpty() )
+void MainWindow::on_tabWidget_tabCloseRequested( int index )
+{
+	if ( index > 1 )
 	{
-		return;
-	}
-
-	path = newPath;
-
-	if ( m_index == 0 )
-	{
-		workplaceScene->clear();
-		workplaceScene->setSceneRect( SvgSave::getSizes( path ) );
-	}
-
-	if ( m_index == 1 )
-	{
-		workplaceScene_2->clear();
-		workplaceScene_2->setSceneRect( SvgSave::getSizes( path ) );
-	}
-
-	if ( m_index == 2 )
-	{
-		workplaceScene_3->clear();
-		workplaceScene_3->setSceneRect( SvgSave::getSizes( path ) );
-	}
-
-
-	foreach ( QGraphicsItem* item, SvgSave::getElements( path ) )
-	{
-		switch ( item->type() )
-		{
-			case QGraphicsPathItem::Type:
-				{
-					Line* line = qgraphicsitem_cast<Line*>( item );
-
-					if ( m_index == 0 )
-					{
-						workplaceScene->addItem( line );
-					}
-
-					if ( m_index == 1 )
-					{
-						workplaceScene_2->addItem( line );
-					}
-
-					if ( m_index == 2 )
-					{
-						workplaceScene_3->addItem( line );
-					}
-
-					break;
-				}
-
-			case QGraphicsRectItem::Type:
-				{
-                    Rectangle* rect = qgraphicsitem_cast<Rectangle*>( item );
-
-					if ( m_index == 0 )
-					{
-						workplaceScene->addItem( rect );
-					}
-
-					if ( m_index == 1 )
-					{
-						workplaceScene_2->addItem( rect );
-					}
-
-					if ( m_index == 2 )
-					{
-						workplaceScene_3->addItem( rect );
-					}
-
-					break;
-				}
-
-			default:
-				break;
-		}
+		m_ui->tabWidget->removeTab( index );
+		m_check = true;
 	}
 }
 
-void MainWindow::on_actionSave_triggered()
+//void MainWindow::on_horizontalSlider_valueChanged(int value)
+//{
+//    qDebug () << value;
+//    m_ui->graphicsView->setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
+//    double scaleFactor = 1.04;
+//    if( value > 0 )
+//         m_ui->graphicsView->scale(scaleFactor,scaleFactor);
+//    else
+//    {
+//        m_ui->graphicsView->scale(1/scaleFactor,1/scaleFactor);
+//    }
+
+//}
+
+
+
+void MainWindow::on_doubleSpinBox_valueChanged(double value)
 {
-	QString newPath = QFileDialog::getSaveFileName( this, trUtf8( "Save SVG" ),
-													path, tr( "SVG files (*.svg)" ) );
+    currentRectangle->setOpacity( value );
+    workplaceScene->addItem(currentRectangle);
+}
 
-	if ( newPath.isEmpty() )
-	{
-		return;
-	}
+void MainWindow::on_doubleSpinBox_2_valueChanged(double value)
+{
+    currentLine->setOpacity( value );
+    workplaceScene->addItem(currentLine);
+}
 
-	path = newPath;
+void MainWindow::on_borderWidth_3_valueChanged(int value)
+{
+    if ( currentRectangle != nullptr )
+    {
+        QGraphicsDropShadowEffect * effect = new QGraphicsDropShadowEffect();
+        effect->setBlurRadius(value);
 
-	QSvgGenerator generator;
+        currentRectangle->setGraphicsEffect(effect);
+        workplaceScene->addItem(currentRectangle);
+    }
+    if( value == 0 )
+    {
+        currentRectangle->setGraphicsEffect( NULL );
+    }
+}
+
+void MainWindow::on_m_open_clicked()
+{
+    QString newPath = QFileDialog::getOpenFileName( this, trUtf8( "Open SVG" ),
+                                                    path, tr( "SVG files (*.svg)" ) );
+
+    if ( newPath.isEmpty() )
+    {
+        return;
+    }
+
+    path = newPath;
+
+    if ( m_index == 0 )
+    {
+        workplaceScene->clear();
+        workplaceScene->setSceneRect( SvgSave::getSizes( path ) );
+    }
+
+    if ( m_index == 1 )
+    {
+        workplaceScene_2->clear();
+        workplaceScene_2->setSceneRect( SvgSave::getSizes( path ) );
+    }
+
+    if ( m_index == 2 )
+    {
+        workplaceScene_3->clear();
+        workplaceScene_3->setSceneRect( SvgSave::getSizes( path ) );
+    }
+
+
+    foreach ( QGraphicsItem* item, SvgSave::getElements( path ) )
+    {
+        switch ( item->type() )
+        {
+            case QGraphicsPathItem::Type:
+                {
+                    Line* line = qgraphicsitem_cast<Line*>( item );
+
+                    if ( m_index == 0 )
+                    {
+                        workplaceScene->addItem( line );
+                    }
+
+                    if ( m_index == 1 )
+                    {
+                        workplaceScene_2->addItem( line );
+                    }
+
+                    if ( m_index == 2 )
+                    {
+                        workplaceScene_3->addItem( line );
+                    }
+
+                    break;
+                }
+
+            case QGraphicsRectItem::Type:
+                {
+                    Rectangle* rect = qgraphicsitem_cast<Rectangle*>( item );
+
+                    if ( m_index == 0 )
+                    {
+                        workplaceScene->addItem( rect );
+                    }
+
+                    if ( m_index == 1 )
+                    {
+                        workplaceScene_2->addItem( rect );
+                    }
+
+                    if ( m_index == 2 )
+                    {
+                        workplaceScene_3->addItem( rect );
+                    }
+
+                    break;
+                }
+
+            default:
+                break;
+        }
+    }
+}
+
+void MainWindow::on_m_save_clicked()
+{
+    QString newPath = QFileDialog::getSaveFileName( this, trUtf8( "Save SVG" ),
+                                                    path, tr( "SVG files (*.svg)" ) );
+
+    if ( newPath.isEmpty() )
+    {
+        return;
+    }
+
+    path = newPath;
+
+    QSvgGenerator generator;
     if ( m_index == 0 )
     {
         generator.setFileName( path );
@@ -660,11 +763,11 @@ void MainWindow::on_actionSave_triggered()
         generator.setSize( QSize( workplaceScene_3->width(), workplaceScene_3->height() ) );
         generator.setViewBox( QRect( 0, 0, workplaceScene_3->width(), workplaceScene_3->height() ) );
     }
-	generator.setTitle( trUtf8( "Vector Editor" ) );
-	generator.setDescription( trUtf8( "File created by Vector Editor." ) );
+    generator.setTitle( trUtf8( "Vector Editor" ) );
+    generator.setDescription( trUtf8( "File created by Vector Editor." ) );
 
-	QPainter painter;
-	painter.begin( &generator );
+    QPainter painter;
+    painter.begin( &generator );
     if ( m_index == 0 )
     {
         workplaceScene->render( &painter );
@@ -679,80 +782,16 @@ void MainWindow::on_actionSave_triggered()
     {
         workplaceScene_3->render( &painter );
     }
-	painter.end();
+    painter.end();
 }
 
-
-void MainWindow::on_tabWidget_tabBarClicked( int index )
+void MainWindow::on_m_question_clicked()
 {
-	m_index = index;
-}
-
-void MainWindow::on_tabWidget_tabCloseRequested( int index )
-{
-	if ( index > 1 )
-	{
-		m_ui->tabWidget->removeTab( index );
-		m_check = true;
-	}
-}
-
-void MainWindow::on_actionAdd_tad_triggered()
-{
-	if ( m_check == true )
-	{
-        m_view = new QGraphicsView( scene );
-        m_view->setScene( workplaceScene_3 );
-        m_ui->tabWidget->addTab( m_view, "Subsidiary" );
-        m_check = false;
-	}
-
-	else
-	{
-        QMessageBox msgBox(QMessageBox::Warning,
-                           "This is the title",
-                           "The maximum number of tabs is 3!",
-                           QMessageBox::Ok, this,
-                           Qt::FramelessWindowHint);
-        msgBox.setStyleSheet("QMessageBox { border: none;font-family: Arial; font-style: normal;  font-size: 12pt;};");
-		msgBox.exec();
-	}
-
-}
-
-void MainWindow::on_actionInfo_triggered()
-{
-	QMessageBox msgBox(QMessageBox::Question,
-					   "This is the title",
-					   "Do you love your mother?",
-					   QMessageBox::Yes, this,
-					   Qt::FramelessWindowHint);
+    QMessageBox msgBox(QMessageBox::Question,
+                       "This is the title",
+                       "Do you love your mother?",
+                       QMessageBox::Yes, this,
+                       Qt::FramelessWindowHint);
     msgBox.setStyleSheet("QMessageBox { background-image: url(:/icon/Resources/Help.jpg);font-size: 12pt;}");
-	msgBox.exec();
-}
-
-//void MainWindow::on_horizontalSlider_valueChanged(int value)
-//{
-//    qDebug () << value;
-//    m_ui->graphicsView->setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
-//    double scaleFactor = 1.04;
-//    if( value > 0 )
-//         m_ui->graphicsView->scale(scaleFactor,scaleFactor);
-//    else
-//    {
-//        m_ui->graphicsView->scale(1/scaleFactor,1/scaleFactor);
-//    }
-
-//}
-
-void MainWindow::on_pushButton_2_clicked()
-{
-    if ( currentRectangle != nullptr )
-    {
-        QGraphicsDropShadowEffect * effect = new QGraphicsDropShadowEffect();
-        effect->setBlurRadius(50);
-
-        currentRectangle->setGraphicsEffect(effect);
-        workplaceScene->addItem(currentRectangle);
-    }
+    msgBox.exec();
 }

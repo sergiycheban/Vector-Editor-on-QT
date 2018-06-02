@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_MainWindow_t {
-    QByteArrayData data[48];
-    char stringdata0[645];
+    QByteArrayData data[51];
+    char stringdata0[685];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -68,17 +68,20 @@ QT_MOC_LITERAL(33, 362, 15), // "checkSelections"
 QT_MOC_LITERAL(34, 378, 10), // "wheelEvent"
 QT_MOC_LITERAL(35, 389, 12), // "QWheelEvent*"
 QT_MOC_LITERAL(36, 402, 5), // "event"
-QT_MOC_LITERAL(37, 408, 17), // "on_m_line_clicked"
-QT_MOC_LITERAL(38, 426, 19), // "on_m_square_clicked"
-QT_MOC_LITERAL(39, 446, 23), // "on_actionOpen_triggered"
-QT_MOC_LITERAL(40, 470, 23), // "on_actionSave_triggered"
-QT_MOC_LITERAL(41, 494, 26), // "on_tabWidget_tabBarClicked"
-QT_MOC_LITERAL(42, 521, 5), // "index"
-QT_MOC_LITERAL(43, 527, 30), // "on_tabWidget_tabCloseRequested"
-QT_MOC_LITERAL(44, 558, 26), // "on_actionAdd_tad_triggered"
-QT_MOC_LITERAL(45, 585, 23), // "on_actionInfo_triggered"
-QT_MOC_LITERAL(46, 609, 23), // "on_pushButton_2_clicked"
-QT_MOC_LITERAL(47, 633, 11) // "borderWidth"
+QT_MOC_LITERAL(37, 408, 6), // "newTab"
+QT_MOC_LITERAL(38, 415, 17), // "on_m_line_clicked"
+QT_MOC_LITERAL(39, 433, 19), // "on_m_square_clicked"
+QT_MOC_LITERAL(40, 453, 26), // "on_tabWidget_tabBarClicked"
+QT_MOC_LITERAL(41, 480, 5), // "index"
+QT_MOC_LITERAL(42, 486, 30), // "on_tabWidget_tabCloseRequested"
+QT_MOC_LITERAL(43, 517, 29), // "on_doubleSpinBox_valueChanged"
+QT_MOC_LITERAL(44, 547, 5), // "value"
+QT_MOC_LITERAL(45, 553, 31), // "on_doubleSpinBox_2_valueChanged"
+QT_MOC_LITERAL(46, 585, 29), // "on_borderWidth_3_valueChanged"
+QT_MOC_LITERAL(47, 615, 17), // "on_m_open_clicked"
+QT_MOC_LITERAL(48, 633, 17), // "on_m_save_clicked"
+QT_MOC_LITERAL(49, 651, 21), // "on_m_question_clicked"
+QT_MOC_LITERAL(50, 673, 11) // "borderWidth"
 
     },
     "MainWindow\0colorChanged\0\0QColor&\0color\0"
@@ -92,13 +95,14 @@ QT_MOC_LITERAL(47, 633, 11) // "borderWidth"
     "visible\0deselect\0selectNewItem\0"
     "QGraphicsItem*\0item\0selectItem\0"
     "checkSelections\0wheelEvent\0QWheelEvent*\0"
-    "event\0on_m_line_clicked\0on_m_square_clicked\0"
-    "on_actionOpen_triggered\0on_actionSave_triggered\0"
-    "on_tabWidget_tabBarClicked\0index\0"
-    "on_tabWidget_tabCloseRequested\0"
-    "on_actionAdd_tad_triggered\0"
-    "on_actionInfo_triggered\0on_pushButton_2_clicked\0"
-    "borderWidth"
+    "event\0newTab\0on_m_line_clicked\0"
+    "on_m_square_clicked\0on_tabWidget_tabBarClicked\0"
+    "index\0on_tabWidget_tabCloseRequested\0"
+    "on_doubleSpinBox_valueChanged\0value\0"
+    "on_doubleSpinBox_2_valueChanged\0"
+    "on_borderWidth_3_valueChanged\0"
+    "on_m_open_clicked\0on_m_save_clicked\0"
+    "on_m_question_clicked\0borderWidth"
 };
 #undef QT_MOC_LITERAL
 
@@ -108,48 +112,50 @@ static const uint qt_meta_data_MainWindow[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-      32,   14, // methods
-       2,  246, // properties
+      34,   14, // methods
+       2,  264, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
        5,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    1,  174,    2, 0x06 /* Public */,
-       5,    1,  177,    2, 0x06 /* Public */,
-       7,    1,  180,    2, 0x06 /* Public */,
-       8,    1,  183,    2, 0x06 /* Public */,
-       9,    1,  186,    2, 0x06 /* Public */,
+       1,    1,  184,    2, 0x06 /* Public */,
+       5,    1,  187,    2, 0x06 /* Public */,
+       7,    1,  190,    2, 0x06 /* Public */,
+       8,    1,  193,    2, 0x06 /* Public */,
+       9,    1,  196,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-      10,    0,  189,    2, 0x0a /* Public */,
-      11,    0,  190,    2, 0x0a /* Public */,
-      12,    0,  191,    2, 0x0a /* Public */,
-      13,    1,  192,    2, 0x0a /* Public */,
-      14,    1,  195,    2, 0x0a /* Public */,
-      15,    1,  198,    2, 0x0a /* Public */,
-      16,    1,  201,    2, 0x0a /* Public */,
-      17,    1,  204,    2, 0x0a /* Public */,
-      18,    1,  207,    2, 0x0a /* Public */,
-      21,    1,  210,    2, 0x0a /* Public */,
-      22,    1,  213,    2, 0x0a /* Public */,
-      25,    1,  216,    2, 0x0a /* Public */,
-      26,    1,  219,    2, 0x0a /* Public */,
-      28,    0,  222,    2, 0x0a /* Public */,
-      29,    1,  223,    2, 0x0a /* Public */,
-      32,    1,  226,    2, 0x0a /* Public */,
-      33,    0,  229,    2, 0x0a /* Public */,
-      34,    1,  230,    2, 0x0a /* Public */,
-      37,    0,  233,    2, 0x08 /* Private */,
-      38,    0,  234,    2, 0x08 /* Private */,
-      39,    0,  235,    2, 0x08 /* Private */,
-      40,    0,  236,    2, 0x08 /* Private */,
-      41,    1,  237,    2, 0x08 /* Private */,
-      43,    1,  240,    2, 0x08 /* Private */,
-      44,    0,  243,    2, 0x08 /* Private */,
-      45,    0,  244,    2, 0x08 /* Private */,
-      46,    0,  245,    2, 0x08 /* Private */,
+      10,    0,  199,    2, 0x0a /* Public */,
+      11,    0,  200,    2, 0x0a /* Public */,
+      12,    0,  201,    2, 0x0a /* Public */,
+      13,    1,  202,    2, 0x0a /* Public */,
+      14,    1,  205,    2, 0x0a /* Public */,
+      15,    1,  208,    2, 0x0a /* Public */,
+      16,    1,  211,    2, 0x0a /* Public */,
+      17,    1,  214,    2, 0x0a /* Public */,
+      18,    1,  217,    2, 0x0a /* Public */,
+      21,    1,  220,    2, 0x0a /* Public */,
+      22,    1,  223,    2, 0x0a /* Public */,
+      25,    1,  226,    2, 0x0a /* Public */,
+      26,    1,  229,    2, 0x0a /* Public */,
+      28,    0,  232,    2, 0x0a /* Public */,
+      29,    1,  233,    2, 0x0a /* Public */,
+      32,    1,  236,    2, 0x0a /* Public */,
+      33,    0,  239,    2, 0x0a /* Public */,
+      34,    1,  240,    2, 0x0a /* Public */,
+      37,    0,  243,    2, 0x0a /* Public */,
+      38,    0,  244,    2, 0x08 /* Private */,
+      39,    0,  245,    2, 0x08 /* Private */,
+      40,    1,  246,    2, 0x08 /* Private */,
+      42,    1,  249,    2, 0x08 /* Private */,
+      43,    1,  252,    2, 0x08 /* Private */,
+      45,    1,  255,    2, 0x08 /* Private */,
+      46,    1,  258,    2, 0x08 /* Private */,
+      47,    0,  261,    2, 0x08 /* Private */,
+      48,    0,  262,    2, 0x08 /* Private */,
+      49,    0,  263,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void, 0x80000000 | 3,    4,
@@ -180,16 +186,18 @@ static const uint qt_meta_data_MainWindow[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void,
-    QMetaType::Void, QMetaType::Int,   42,
-    QMetaType::Void, QMetaType::Int,   42,
+    QMetaType::Void, QMetaType::Int,   41,
+    QMetaType::Void, QMetaType::Int,   41,
+    QMetaType::Void, QMetaType::Double,   44,
+    QMetaType::Void, QMetaType::Double,   44,
+    QMetaType::Void, QMetaType::Int,   44,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
 
  // properties: name, type, flags
        4, QMetaType::QColor, 0x00495103,
-      47, QMetaType::Int, 0x00495103,
+      50, QMetaType::Int, 0x00495103,
 
  // properties: notify_signal_id
        0,
@@ -227,15 +235,17 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 20: _t->selectItem((*reinterpret_cast< QGraphicsItem*(*)>(_a[1]))); break;
         case 21: _t->checkSelections(); break;
         case 22: _t->wheelEvent((*reinterpret_cast< QWheelEvent*(*)>(_a[1]))); break;
-        case 23: _t->on_m_line_clicked(); break;
-        case 24: _t->on_m_square_clicked(); break;
-        case 25: _t->on_actionOpen_triggered(); break;
-        case 26: _t->on_actionSave_triggered(); break;
-        case 27: _t->on_tabWidget_tabBarClicked((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 28: _t->on_tabWidget_tabCloseRequested((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 29: _t->on_actionAdd_tad_triggered(); break;
-        case 30: _t->on_actionInfo_triggered(); break;
-        case 31: _t->on_pushButton_2_clicked(); break;
+        case 23: _t->newTab(); break;
+        case 24: _t->on_m_line_clicked(); break;
+        case 25: _t->on_m_square_clicked(); break;
+        case 26: _t->on_tabWidget_tabBarClicked((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 27: _t->on_tabWidget_tabCloseRequested((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 28: _t->on_doubleSpinBox_valueChanged((*reinterpret_cast< double(*)>(_a[1]))); break;
+        case 29: _t->on_doubleSpinBox_2_valueChanged((*reinterpret_cast< double(*)>(_a[1]))); break;
+        case 30: _t->on_borderWidth_3_valueChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 31: _t->on_m_open_clicked(); break;
+        case 32: _t->on_m_save_clicked(); break;
+        case 33: _t->on_m_question_clicked(); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
@@ -371,13 +381,13 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 32)
+        if (_id < 34)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 32;
+        _id -= 34;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 32)
+        if (_id < 34)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 32;
+        _id -= 34;
     }
 #ifndef QT_NO_PROPERTIES
    else if (_c == QMetaObject::ReadProperty || _c == QMetaObject::WriteProperty

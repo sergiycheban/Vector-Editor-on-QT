@@ -216,7 +216,7 @@ void WorkPlace::keyPressEvent( QKeyEvent* event )
 
 					foreach ( QGraphicsItem* item, items() )
                     {
-						item->setSelected( true );
+                        item->setSelected( true );
 					}
 
 					if ( selectedItems().length() == 1 )

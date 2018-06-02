@@ -38,145 +38,48 @@
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout_2">
-    <item row="0" column="0" colspan="2">
-     <layout class="QVBoxLayout" name="verticalLayout_2">
-      <item>
-       <widget class="QPushButton" name="m_square">
-        <property name="enabled">
-         <bool>true</bool>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>90</width>
-          <height>29</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>Rectangle</string>
-        </property>
-        <property name="checkable">
-         <bool>false</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="m_line">
-        <property name="maximumSize">
-         <size>
-          <width>90</width>
-          <height>29</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>Line        </string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="m_move">
-        <property name="maximumSize">
-         <size>
-          <width>90</width>
-          <height>29</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>Edit        </string>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </item>
-    <item row="0" column="2" rowspan="4">
-     <widget class="QTabWidget" name="tabWidget">
-      <property name="autoFillBackground">
-       <bool>false</bool>
-      </property>
-      <property name="tabPosition">
-       <enum>QTabWidget::North</enum>
-      </property>
-      <property name="tabShape">
-       <enum>QTabWidget::Rounded</enum>
-      </property>
-      <property name="currentIndex">
-       <number>0</number>
-      </property>
-      <property name="iconSize">
+    <item row="1" column="0">
+     <widget class="QPushButton" name="m_question">
+      <property name="minimumSize">
        <size>
-        <width>32</width>
-        <height>32</height>
+        <width>30</width>
+        <height>30</height>
        </size>
       </property>
-      <property name="elideMode">
-       <enum>Qt::ElideMiddle</enum>
+      <property name="maximumSize">
+       <size>
+        <width>25</width>
+        <height>25</height>
+       </size>
       </property>
-      <property name="usesScrollButtons">
-       <bool>false</bool>
+      <property name="text">
+       <string/>
       </property>
-      <property name="documentMode">
-       <bool>false</bool>
-      </property>
-      <property name="tabsClosable">
-       <bool>true</bool>
-      </property>
-      <property name="movable">
-       <bool>false</bool>
-      </property>
-      <widget class="QWidget" name="tab">
-       <attribute name="title">
-        <string>Main</string>
-       </attribute>
-       <widget class="QGraphicsView" name="graphicsView">
-        <property name="geometry">
-         <rect>
-          <x>0</x>
-          <y>0</y>
-          <width>1176</width>
-          <height>538</height>
-         </rect>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>1176</width>
-          <height>538</height>
-         </size>
-        </property>
-       </widget>
-      </widget>
-      <widget class="QWidget" name="tab_2">
-       <attribute name="title">
-        <string>Subsidiary</string>
-       </attribute>
-       <widget class="QGraphicsView" name="graphicsView_3">
-        <property name="geometry">
-         <rect>
-          <x>0</x>
-          <y>0</y>
-          <width>1176</width>
-          <height>538</height>
-         </rect>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>1176</width>
-          <height>538</height>
-         </size>
-        </property>
-       </widget>
-      </widget>
      </widget>
     </item>
-    <item row="1" column="0" rowspan="3" colspan="2">
+    <item row="0" column="3">
      <layout class="QVBoxLayout" name="verticalLayout_3">
       <item>
        <widget class="QWidget" name="widget_rect" native="true">
+        <property name="minimumSize">
+         <size>
+          <width>120</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>90</width>
+          <height>16777215</height>
+         </size>
+        </property>
         <widget class="QWidget" name="layoutWidget">
          <property name="geometry">
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>92</width>
-           <height>182</height>
+           <width>121</width>
+           <height>215</height>
           </rect>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -268,15 +171,54 @@
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="pushButton_2">
+           <widget class="QLabel" name="label_7">
+            <property name="text">
+             <string>Opacity</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QDoubleSpinBox" name="doubleSpinBox">
+            <property name="maximumSize">
+             <size>
+              <width>90</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="maximum">
+             <double>1.000000000000000</double>
+            </property>
+            <property name="singleStep">
+             <double>0.010000000000000</double>
+            </property>
+            <property name="value">
+             <double>1.000000000000000</double>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_6">
+            <property name="text">
+             <string>Shadow</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QSpinBox" name="borderWidth_3">
             <property name="maximumSize">
              <size>
               <width>90</width>
               <height>30</height>
              </size>
             </property>
-            <property name="text">
-             <string>Shadow</string>
+            <property name="minimum">
+             <number>10</number>
+            </property>
+            <property name="maximum">
+             <number>100</number>
+            </property>
+            <property name="value">
+             <number>10</number>
             </property>
            </widget>
           </item>
@@ -299,18 +241,36 @@
       </item>
       <item>
        <widget class="QWidget" name="widget_line" native="true">
+        <property name="minimumSize">
+         <size>
+          <width>120</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>120</width>
+          <height>16777215</height>
+         </size>
+        </property>
         <widget class="QWidget" name="layoutWidget">
          <property name="geometry">
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>71</width>
-           <height>125</height>
+           <width>121</width>
+           <height>136</height>
           </rect>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout">
           <item>
            <widget class="QLabel" name="label_3">
+            <property name="minimumSize">
+             <size>
+              <width>90</width>
+              <height>0</height>
+             </size>
+            </property>
             <property name="maximumSize">
              <size>
               <width>90</width>
@@ -324,6 +284,12 @@
           </item>
           <item>
            <widget class="ColorLabel" name="borderColor_3">
+            <property name="minimumSize">
+             <size>
+              <width>90</width>
+              <height>0</height>
+             </size>
+            </property>
             <property name="maximumSize">
              <size>
               <width>90</width>
@@ -337,6 +303,12 @@
           </item>
           <item>
            <widget class="QLabel" name="label_5">
+            <property name="minimumSize">
+             <size>
+              <width>90</width>
+              <height>0</height>
+             </size>
+            </property>
             <property name="maximumSize">
              <size>
               <width>90</width>
@@ -371,6 +343,32 @@
            </widget>
           </item>
           <item>
+           <widget class="QLabel" name="label_8">
+            <property name="text">
+             <string>Opacity</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QDoubleSpinBox" name="doubleSpinBox_2">
+            <property name="maximumSize">
+             <size>
+              <width>90</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="maximum">
+             <double>1.000000000000000</double>
+            </property>
+            <property name="singleStep">
+             <double>0.010000000000000</double>
+            </property>
+            <property name="value">
+             <double>1.000000000000000</double>
+            </property>
+           </widget>
+          </item>
+          <item>
            <spacer name="verticalSpacer_2">
             <property name="orientation">
              <enum>Qt::Vertical</enum>
@@ -389,49 +387,225 @@
       </item>
      </layout>
     </item>
+    <item row="0" column="2" rowspan="2">
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="minimumSize">
+       <size>
+        <width>1020</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="autoFillBackground">
+       <bool>false</bool>
+      </property>
+      <property name="tabPosition">
+       <enum>QTabWidget::North</enum>
+      </property>
+      <property name="tabShape">
+       <enum>QTabWidget::Rounded</enum>
+      </property>
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>32</width>
+        <height>32</height>
+       </size>
+      </property>
+      <property name="elideMode">
+       <enum>Qt::ElideMiddle</enum>
+      </property>
+      <property name="usesScrollButtons">
+       <bool>false</bool>
+      </property>
+      <property name="documentMode">
+       <bool>false</bool>
+      </property>
+      <property name="tabsClosable">
+       <bool>true</bool>
+      </property>
+      <property name="movable">
+       <bool>false</bool>
+      </property>
+      <widget class="QWidget" name="tab">
+       <attribute name="title">
+        <string>Main</string>
+       </attribute>
+       <widget class="QGraphicsView" name="graphicsView">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>1020</width>
+          <height>551</height>
+         </rect>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>1020</width>
+          <height>551</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>1020</width>
+          <height>551</height>
+         </size>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="tab_2">
+       <attribute name="title">
+        <string>Subsidiary</string>
+       </attribute>
+       <widget class="QGraphicsView" name="graphicsView_3">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>1020</width>
+          <height>551</height>
+         </rect>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>1020</width>
+          <height>551</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>1020</width>
+          <height>551</height>
+         </size>
+        </property>
+       </widget>
+      </widget>
+     </widget>
+    </item>
+    <item row="0" column="0" colspan="2">
+     <layout class="QVBoxLayout" name="verticalLayout_2">
+      <item>
+       <widget class="QWidget" name="widget" native="true">
+        <property name="minimumSize">
+         <size>
+          <width>120</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>120</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <widget class="QWidget" name="">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>2</y>
+           <width>121</width>
+           <height>141</height>
+          </rect>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_5">
+          <item>
+           <widget class="QPushButton" name="m_square">
+            <property name="enabled">
+             <bool>true</bool>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>90</width>
+              <height>29</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Rectangle</string>
+            </property>
+            <property name="checkable">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="m_line">
+            <property name="maximumSize">
+             <size>
+              <width>90</width>
+              <height>29</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Line        </string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="m_move">
+            <property name="maximumSize">
+             <size>
+              <width>90</width>
+              <height>29</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Edit        </string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item row="1" column="3">
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QPushButton" name="m_save">
+        <property name="minimumSize">
+         <size>
+          <width>40</width>
+          <height>40</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>40</width>
+          <height>40</height>
+         </size>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="m_open">
+        <property name="minimumSize">
+         <size>
+          <width>40</width>
+          <height>40</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>40</width>
+          <height>40</height>
+         </size>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
    </layout>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
-  <widget class="QMenuBar" name="menuBar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>1300</width>
-     <height>21</height>
-    </rect>
-   </property>
-   <widget class="QMenu" name="menuFile">
-    <property name="title">
-     <string>File</string>
-    </property>
-    <addaction name="actionOpen"/>
-    <addaction name="actionSave"/>
-   </widget>
-   <widget class="QMenu" name="menuTools">
-    <property name="title">
-     <string>Tools</string>
-    </property>
-    <addaction name="actionAdd_tad"/>
-   </widget>
-   <widget class="QMenu" name="menuHelp">
-    <property name="title">
-     <string>Help</string>
-    </property>
-    <addaction name="actionInfo"/>
-   </widget>
-   <widget class="QMenu" name="menuEdit">
-    <property name="title">
-     <string>Edit</string>
-    </property>
-    <addaction name="actionDelete_Item"/>
-    <addaction name="actionSelect_all"/>
-   </widget>
-   <addaction name="menuFile"/>
-   <addaction name="menuEdit"/>
-   <addaction name="menuTools"/>
-   <addaction name="menuHelp"/>
-  </widget>
   <action name="actionOpen">
    <property name="text">
     <string>Open</string>
@@ -463,6 +637,11 @@
    </property>
    <property name="text">
     <string>Delete Item</string>
+   </property>
+  </action>
+  <action name="actionSeparate_menu">
+   <property name="text">
+    <string>Separate menu</string>
    </property>
   </action>
  </widget>

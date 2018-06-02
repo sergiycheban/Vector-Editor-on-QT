@@ -39,7 +39,8 @@ SOURCES += \
     mainwindow.cpp \
     rectangle.cpp \
     svssave.cpp \
-    workplace.cpp
+    workplace.cpp \
+    diagramitem.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -55,7 +56,8 @@ HEADERS += \
     mainwindow.h \
     rectangle.h \
     svssave.h \
-    workplace.h
+    workplace.h \
+    diagramitem.h
 
 FORMS += \
         mainwindow.ui
