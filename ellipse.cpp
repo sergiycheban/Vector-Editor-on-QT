@@ -192,17 +192,9 @@ void Ellipse::mouseReleaseEvent( QGraphicsSceneMouseEvent* event )
     QGraphicsItem::mouseReleaseEvent( event );
 }
 
-void Ellipse::mouseDoubleClickEvent( QGraphicsSceneMouseEvent* event )
-{
-    m_actionFlags = ( m_actionFlags == ResizeState ) ? RotationState : ResizeState;
-    setVisibilityGrabbers();
-    QGraphicsItem::mouseDoubleClickEvent( event );
-}
-
 void Ellipse::hoverEnterEvent( QGraphicsSceneHoverEvent* event )
 {
     setPositionGrabbers();
-    setVisibilityGrabbers();
     QGraphicsItem::hoverEnterEvent( event );
 }
 
@@ -519,37 +511,9 @@ void Ellipse::setPositionGrabbers()
     QRectF tmpRect = rect();
 
     cornerGrabber[GrabberTop]->setPos( tmpRect.left() + tmpRect.width() / 2, tmpRect.top() );
-    cornerGrabber[GrabberBottomRight]->setPos( tmpRect.bottomRight().x(), tmpRect.bottomRight().y() );
     cornerGrabber[GrabberBottom]->setPos( tmpRect.left() + tmpRect.width() / 2, tmpRect.bottom() );
     cornerGrabber[GrabberLeft]->setPos( tmpRect.left(), tmpRect.top() + tmpRect.height() / 2 );
     cornerGrabber[GrabberRight]->setPos( tmpRect.right(), tmpRect.top() + tmpRect.height() / 2 );
-    cornerGrabber[GrabberTopLeft]->setPos( tmpRect.topLeft().x(), tmpRect.topLeft().y() );
-    cornerGrabber[GrabberTopRight]->setPos( tmpRect.topRight().x(), tmpRect.topRight().y() );
-    cornerGrabber[GrabberBottomLeft]->setPos( tmpRect.bottomLeft().x(), tmpRect.bottomLeft().y() );
-}
-
-void Ellipse::setVisibilityGrabbers()
-{
-    cornerGrabber[GrabberTopLeft]->setVisible( true );
-    cornerGrabber[GrabberTopRight]->setVisible( true );
-    cornerGrabber[GrabberBottomLeft]->setVisible( true );
-    cornerGrabber[GrabberBottomRight]->setVisible( true );
-
-    if ( m_actionFlags == ResizeState )
-    {
-        cornerGrabber[GrabberTop]->setVisible( true );
-        cornerGrabber[GrabberBottom]->setVisible( true );
-        cornerGrabber[GrabberLeft]->setVisible( true );
-        cornerGrabber[GrabberRight]->setVisible( true );
-    }
-
-    else
-    {
-        cornerGrabber[GrabberTop]->setVisible( false );
-        cornerGrabber[GrabberBottom]->setVisible( false );
-        cornerGrabber[GrabberLeft]->setVisible( false );
-        cornerGrabber[GrabberRight]->setVisible( false );
-    }
 }
 
 void Ellipse::hideGrabbers()

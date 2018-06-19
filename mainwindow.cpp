@@ -688,7 +688,7 @@ void MainWindow::on_m_ellipse_clicked()
     m_ui->widget_rect->show();
     m_ui->label_6->hide();
     m_ui->borderWidth_3->hide();
-    m_ui->doubleSpinBox_2->hide();
+    m_ui->doubleSpinBox->hide();
     m_ui->label_7->hide();
 }
 
