@@ -107,8 +107,7 @@ void Line::hoverEnterEvent( QGraphicsSceneHoverEvent* event )
 		connect( dot, &Dotsignal::signalMove, this, &Line::slotMove );
 		dot->setDotFlags( Dotsignal::Movable );
 		listDotes.append( dot );
-	}
-
+    }
 	QGraphicsItem::hoverEnterEvent( event );
 }
 
@@ -124,7 +123,6 @@ void Line::slotMove( QGraphicsItem* signalOwner, qreal dx, qreal dy )
 			linePath.setElementPositionAt( i, pathPoint.x() + dx, pathPoint.y() + dy );
 		}
 	}
-
 	setPath( linePath );
 }
 

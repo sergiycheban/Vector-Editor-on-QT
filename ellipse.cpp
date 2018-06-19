@@ -195,6 +195,7 @@ void Ellipse::mouseReleaseEvent( QGraphicsSceneMouseEvent* event )
 void Ellipse::hoverEnterEvent( QGraphicsSceneHoverEvent* event )
 {
     setPositionGrabbers();
+    setVisibilityGrabbers();
     QGraphicsItem::hoverEnterEvent( event );
 }
 
@@ -514,6 +515,30 @@ void Ellipse::setPositionGrabbers()
     cornerGrabber[GrabberBottom]->setPos( tmpRect.left() + tmpRect.width() / 2, tmpRect.bottom() );
     cornerGrabber[GrabberLeft]->setPos( tmpRect.left(), tmpRect.top() + tmpRect.height() / 2 );
     cornerGrabber[GrabberRight]->setPos( tmpRect.right(), tmpRect.top() + tmpRect.height() / 2 );
+}
+
+void Ellipse::setVisibilityGrabbers()
+{
+    cornerGrabber[GrabberTopLeft]->setVisible( true );
+    cornerGrabber[GrabberTopRight]->setVisible( true );
+    cornerGrabber[GrabberBottomLeft]->setVisible( true );
+    cornerGrabber[GrabberBottomRight]->setVisible( true );
+
+    if ( m_actionFlags == ResizeState )
+    {
+        cornerGrabber[GrabberTop]->setVisible( true );
+        cornerGrabber[GrabberBottom]->setVisible( true );
+        cornerGrabber[GrabberLeft]->setVisible( true );
+        cornerGrabber[GrabberRight]->setVisible( true );
+    }
+
+    else
+    {
+        cornerGrabber[GrabberTop]->setVisible( false );
+        cornerGrabber[GrabberBottom]->setVisible( false );
+        cornerGrabber[GrabberLeft]->setVisible( false );
+        cornerGrabber[GrabberRight]->setVisible( false );
+    }
 }
 
 void Ellipse::hideGrabbers()

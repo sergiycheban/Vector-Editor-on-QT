@@ -25,7 +25,6 @@ class MainWindow : public QMainWindow
 	Q_PROPERTY( QColor color READ color WRITE setColor NOTIFY colorChanged )
 	Q_PROPERTY( int borderWidth READ borderWidth WRITE setBorderWidth NOTIFY borderWidthChanged )
 
-
 public:
 	explicit MainWindow( QWidget* parent = 0 );
 	~MainWindow();

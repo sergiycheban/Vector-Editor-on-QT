@@ -70,6 +70,7 @@ protected:
     void hoverMoveEvent( QGraphicsSceneHoverEvent* event ) override;
     QVariant itemChange( GraphicsItemChange change, const QVariant& value ) override;
 
+
 private:
     unsigned int m_cornerFlags;
     unsigned int m_actionFlags;
@@ -84,6 +85,7 @@ private:
 
     void rotateItem( const QPointF& pt );
     void setPositionGrabbers();
+    void setVisibilityGrabbers();
     void hideGrabbers();
 };
 

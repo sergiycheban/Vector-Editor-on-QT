@@ -315,10 +315,10 @@ void MainWindow::setColor( const QColor& color )
         currentRectangle->setBrush( QBrush( m_color ) );
     }
 
-    if ( currentEllipse != nullptr )
-    {
-        currentEllipse->setBrush( QBrush( m_color ) );
-    }
+//    if ( currentEllipse != nullptr )
+//    {
+//        currentEllipse->setBrush( QBrush( m_color ) );
+//    }
 	emit colorChanged( m_color );
 }
 
@@ -348,11 +348,11 @@ void MainWindow::setBorderWidth( const int& width )
             currentEllipse->setPen( Qt::NoPen );
         }
 
-        else
-        {
-            QPen pen( currentEllipse->pen().color(), width );
-            currentEllipse->setPen( pen );
-        }
+//        else
+//        {
+//            QPen pen( currentEllipse->pen().color(), width );
+//            currentEllipse->setPen( pen );
+//        }
     }
 
 	emit borderWidthChanged( m_borderWidth );
@@ -369,11 +369,11 @@ void MainWindow::setBorderColor( const QColor& color )
 		currentRectangle->setPen( pen );
 	}
 
-    if ( currentEllipse != nullptr )
-    {
-        QPen pen( color, currentEllipse->pen().width() );
-        currentEllipse->setPen( pen );
-    }
+//    if ( currentEllipse != nullptr )
+//    {
+//        QPen pen( color, currentEllipse->pen().width() );
+//        currentEllipse->setPen( pen );
+//    }
 
 
 	emit borderColorChanged( m_borderColor );
@@ -462,6 +462,7 @@ void MainWindow::deselect()
 {
 	currentLine = nullptr;
 	currentRectangle = nullptr;
+    currentEllipse = nullptr;
 }
 
 void MainWindow::setVisible( bool visible )
@@ -501,8 +502,8 @@ void MainWindow::selectNewItem( QGraphicsItem* item )
 			}
     case QGraphicsEllipseItem::Type:
         {
-            Ellipse* rect = qgraphicsitem_cast<Ellipse*>( item );
-            newEllipse( rect );
+            Ellipse* ellip = qgraphicsitem_cast<Ellipse*>( item );
+            newEllipse( ellip );
             break;
         }
 
@@ -531,8 +532,8 @@ void MainWindow::selectItem( QGraphicsItem* item )
 
     case QGraphicsEllipseItem::Type:
         {
-            Ellipse* rect = qgraphicsitem_cast<Ellipse*>( item );
-            loadEllipse( rect );
+            Ellipse* ellip = qgraphicsitem_cast<Ellipse*>( item );
+            loadEllipse( ellip );
             break;
         }
 
@@ -678,7 +679,7 @@ void MainWindow::on_m_square_clicked()
 	m_ui->widget_rect->show();
     m_ui->label_6->show();
     m_ui->borderWidth_3->show();
-    m_ui->doubleSpinBox_2->show();
+    m_ui->doubleSpinBox->show();
     m_ui->label_7->show();
 }
 
@@ -711,7 +712,18 @@ void MainWindow::on_doubleSpinBox_valueChanged(double value)
     if ( currentRectangle != nullptr )
     {
         currentRectangle->setOpacity( value );
-        workplaceScene->addItem(currentRectangle);
+        if ( m_index == 0 )
+        {
+            workplaceScene->addItem(currentRectangle);
+        }
+        if ( m_index == 1 )
+        {
+            workplaceScene_2->addItem(currentRectangle);
+        }
+        if ( m_index == 2 )
+        {
+            workplaceScene_3->addItem(currentRectangle);
+        }
     }
 }
 
@@ -720,7 +732,18 @@ void MainWindow::on_doubleSpinBox_2_valueChanged(double value)
     if ( currentLine != nullptr )
     {
         currentLine->setOpacity( value );
-        workplaceScene->addItem(currentLine);
+        if ( m_index == 0 )
+        {
+            workplaceScene->addItem(currentLine);
+        }
+        if ( m_index == 1 )
+        {
+            workplaceScene_2->addItem(currentLine);
+        }
+        if ( m_index == 2 )
+        {
+            workplaceScene_3->addItem(currentLine);
+        }
     }
 }
 
