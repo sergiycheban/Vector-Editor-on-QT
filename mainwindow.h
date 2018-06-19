@@ -9,6 +9,7 @@
 
 #include <workplace.h>
 #include "line.h"
+#include "ellipse.h"
 #include "graphicsview.h"
 
 
@@ -38,7 +39,7 @@ public:
 signals:
 	void colorChanged( QColor& color );
 	void borderWidthChanged( const int& width );
-	void borderColorChanged( const QColor& color );
+    void borderColorChanged( const QColor& color );
 	void lineColorChanged( const QColor& color );
 	void lineWidthChanged( const int& width );
 
@@ -54,6 +55,8 @@ public slots:
 	void setBorderColor( const QColor& color );
     void newRectangle( Rectangle* rect );
     void loadRectangle( Rectangle* rect );
+    void newEllipse( Ellipse* rect );
+    void loadEllipse( Ellipse* rect );
 	void newLine( Line* line );
 	void loadLine( Line* line );
 	void setVisible( bool visible ) override;
@@ -86,6 +89,8 @@ private slots:
 
     void on_m_question_clicked();
 
+    void on_m_ellipse_clicked();
+
 private:
     Ui::MainWindow*		m_ui;
     QGraphicsScene*		scene;
@@ -104,6 +109,8 @@ private:
 	QString				path;
     Rectangle*			currentRectangle = nullptr;
 	Line*				currentLine      = nullptr;
+    Ellipse*            currentEllipse   = nullptr;
+
 
     int					m_index          = 0;
 	bool                m_check          = true;

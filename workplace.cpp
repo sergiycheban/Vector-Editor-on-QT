@@ -6,6 +6,7 @@
 #include "rectangle.h"
 #include "mainwindow.h"
 #include "line.h"
+#include "ellipse.h"
 
 WorkPlace::WorkPlace( QObject* parent ) :
 	QGraphicsScene( parent ),
@@ -108,7 +109,22 @@ void WorkPlace::mousePressEvent( QGraphicsSceneMouseEvent* event )
 				break;
             }
 
+    case EllipseType:
+        {
+            if ( m_leftMouseButtonPressed && !( event->button() & Qt::RightButton )
+                 && !( event->button() & Qt::MiddleButton ) )
+            {
+                deselectItems();
+                Ellipse* ellipse = new Ellipse();
+                currentItem = ellipse;
+                addItem( currentItem );
+                connect( ellipse, &Ellipse::clicked, this, &WorkPlace::signalSelectItem );
+                connect( ellipse, &Ellipse::signalMove, this, &WorkPlace::slotMove );
+                emit signalNewSelectItem( ellipse );
+            }
 
+            break;
+        }
 
 		default:
 			{
@@ -152,6 +168,21 @@ void WorkPlace::mouseMoveEvent( QGraphicsSceneMouseEvent* event )
 				break;
 			}
 
+    case EllipseType:
+        {
+            if ( m_leftMouseButtonPressed )
+            {
+                auto dx = event->scenePos().x() - m_previousPosition.x();
+                auto dy = event->scenePos().y() - m_previousPosition.y();
+                Ellipse* ellipse = qgraphicsitem_cast<Ellipse*>( currentItem );
+                ellipse->setRect( ( dx > 0 ) ? m_previousPosition.x() : event->scenePos().x(),
+                                    ( dy > 0 ) ? m_previousPosition.y() : event->scenePos().y(),
+                                    qAbs( dx ), qAbs( dy ) );
+            }
+
+            break;
+        }
+
 
 		default:
 			{
@@ -183,6 +214,18 @@ void WorkPlace::mouseReleaseEvent( QGraphicsSceneMouseEvent* event )
 
 				break;
 			}
+
+    case EllipseType:
+        {
+            if ( !m_leftMouseButtonPressed &&
+                 !( event->button() & Qt::RightButton ) &&
+                 !( event->button() & Qt::MiddleButton ) )
+            {
+                currentItem = nullptr;
+            }
+
+            break;
+        }
 
 
 		default:

@@ -16,7 +16,7 @@ class WorkPlace : public QGraphicsScene
 	Q_PROPERTY( int currentAction READ currentAction WRITE setCurrentAction NOTIFY
 				currentActionChanged )
 	Q_PROPERTY( QPointF previousPosition READ previousPosition WRITE setPreviousPosition NOTIFY
-				previousPositionChanged )
+                previousPositionChanged )
 
 public:
 	explicit WorkPlace( QObject* parent = 0 );
@@ -27,7 +27,8 @@ public:
 		DefaultType,
 		LineType,
 		RectangleType,
-        SelectionType
+        SelectionType,
+        EllipseType
 	};
 
 	int currentAction() const;

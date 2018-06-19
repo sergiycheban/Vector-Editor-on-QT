@@ -500,7 +500,7 @@
           <height>16777215</height>
          </size>
         </property>
-        <widget class="QWidget" name="">
+        <widget class="QWidget" name="layoutWidget">
          <property name="geometry">
           <rect>
            <x>0</x>
@@ -539,6 +539,19 @@
             </property>
             <property name="text">
              <string>Line        </string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="m_ellipse">
+            <property name="maximumSize">
+             <size>
+              <width>90</width>
+              <height>29</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Ellipse      </string>
             </property>
            </widget>
           </item>

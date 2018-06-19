@@ -76,10 +76,11 @@ public:
     QGraphicsView *graphicsView_3;
     QVBoxLayout *verticalLayout_2;
     QWidget *widget;
-    QWidget *widget1;
+    QWidget *layoutWidget2;
     QVBoxLayout *verticalLayout_5;
     QPushButton *m_square;
     QPushButton *m_line;
+    QPushButton *m_ellipse;
     QPushButton *m_move;
     QHBoxLayout *horizontalLayout;
     QPushButton *m_save;
@@ -322,15 +323,15 @@ public:
         widget->setObjectName(QStringLiteral("widget"));
         widget->setMinimumSize(QSize(120, 0));
         widget->setMaximumSize(QSize(120, 16777215));
-        widget1 = new QWidget(widget);
-        widget1->setObjectName(QStringLiteral("widget1"));
-        widget1->setGeometry(QRect(0, 2, 121, 141));
-        verticalLayout_5 = new QVBoxLayout(widget1);
+        layoutWidget2 = new QWidget(widget);
+        layoutWidget2->setObjectName(QStringLiteral("layoutWidget2"));
+        layoutWidget2->setGeometry(QRect(0, 2, 121, 141));
+        verticalLayout_5 = new QVBoxLayout(layoutWidget2);
         verticalLayout_5->setSpacing(6);
         verticalLayout_5->setContentsMargins(11, 11, 11, 11);
         verticalLayout_5->setObjectName(QStringLiteral("verticalLayout_5"));
         verticalLayout_5->setContentsMargins(0, 0, 0, 0);
-        m_square = new QPushButton(widget1);
+        m_square = new QPushButton(layoutWidget2);
         m_square->setObjectName(QStringLiteral("m_square"));
         m_square->setEnabled(true);
         m_square->setMaximumSize(QSize(90, 29));
@@ -338,13 +339,19 @@ public:
 
         verticalLayout_5->addWidget(m_square);
 
-        m_line = new QPushButton(widget1);
+        m_line = new QPushButton(layoutWidget2);
         m_line->setObjectName(QStringLiteral("m_line"));
         m_line->setMaximumSize(QSize(90, 29));
 
         verticalLayout_5->addWidget(m_line);
 
-        m_move = new QPushButton(widget1);
+        m_ellipse = new QPushButton(layoutWidget2);
+        m_ellipse->setObjectName(QStringLiteral("m_ellipse"));
+        m_ellipse->setMaximumSize(QSize(90, 29));
+
+        verticalLayout_5->addWidget(m_ellipse);
+
+        m_move = new QPushButton(layoutWidget2);
         m_move->setObjectName(QStringLiteral("m_move"));
         m_move->setMaximumSize(QSize(90, 29));
 
@@ -415,6 +422,7 @@ public:
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("MainWindow", "Subsidiary", nullptr));
         m_square->setText(QApplication::translate("MainWindow", "Rectangle", nullptr));
         m_line->setText(QApplication::translate("MainWindow", "Line        ", nullptr));
+        m_ellipse->setText(QApplication::translate("MainWindow", "Ellipse      ", nullptr));
         m_move->setText(QApplication::translate("MainWindow", "Edit        ", nullptr));
         m_save->setText(QString());
         m_open->setText(QString());

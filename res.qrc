@@ -19,5 +19,7 @@
         <file>Resources/save.svg</file>
         <file>Resources/marquee.svg</file>
         <file>Resources/cave-painting.svg</file>
+        <file>Resources/animated-cat-image-0072.gif</file>
+        <file>Resources/edit.svg</file>
     </qresource>
 </RCC>

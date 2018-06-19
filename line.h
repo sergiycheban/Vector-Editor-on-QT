@@ -10,7 +10,7 @@ class Line : public QObject, public QGraphicsPathItem
 {
 	Q_OBJECT
 	Q_PROPERTY( QPointF previousPosition READ previousPosition WRITE setPreviousPosition NOTIFY
-				previousPositionChanged )
+                    previousPositionChanged )
 
 public:
 	explicit Line( QObject* parent = 0 );

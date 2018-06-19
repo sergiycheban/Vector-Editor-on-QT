@@ -21,6 +21,7 @@
 #include "workplace.h"
 #include "rectangle.h"
 #include "line.h"
+#include "ellipse.h"
 #include "svssave.h"
 #include "graphicsview.h"
 
@@ -77,6 +78,7 @@ MainWindow::~MainWindow()
 	delete m_ui;
 	delete currentRectangle;
 	delete currentLine;
+    delete currentEllipse;
 }
 
 
@@ -146,6 +148,11 @@ void MainWindow::connects()
 	{
 		workplaceScene->setCurrentAction( WorkPlace::LineType );
     } );
+    connect( m_ui->m_ellipse, &QToolButton::clicked, [ = ]()
+    {
+        workplaceScene->setCurrentAction( WorkPlace::EllipseType );
+    } );
+
 
 
 	connect( workplaceScene, &WorkPlace::signalSelectItem, this, &MainWindow::selectItem );
@@ -153,6 +160,8 @@ void MainWindow::connects()
 	connect( workplaceScene, &WorkPlace::signalNewSelectItem, this, &MainWindow::selectNewItem );
 
 	connect( workplaceScene, &WorkPlace::selectionChanged, this, &MainWindow::checkSelections );
+
+
 
 
 	connect( m_ui->m_square, &QToolButton::clicked, [ = ]()
@@ -167,6 +176,10 @@ void MainWindow::connects()
 	{
 		workplaceScene_2->setCurrentAction( WorkPlace::LineType );
 	} );
+    connect( m_ui->m_ellipse, &QToolButton::clicked, [ = ]()
+    {
+        workplaceScene_2->setCurrentAction( WorkPlace::EllipseType );
+    } );
 
 	connect( workplaceScene_2, &WorkPlace::signalSelectItem, this, &MainWindow::selectItem );
 
@@ -187,6 +200,10 @@ void MainWindow::connects()
 	{
 		workplaceScene_3->setCurrentAction( WorkPlace::LineType );
 	} );
+    connect( m_ui->m_ellipse, &QToolButton::clicked, [ = ]()
+    {
+        workplaceScene_3->setCurrentAction( WorkPlace::EllipseType );
+    } );
 
 	connect( workplaceScene_3, &WorkPlace::signalSelectItem, this, &MainWindow::selectItem );
 
@@ -222,6 +239,12 @@ void MainWindow::styleSheets()
 	m_ui->m_line->setIcon( ButtonIconSearch );
     m_ui->m_line->setIconSize( QSize( 30, 30 ) );
     m_ui->m_line->setStyleSheet( "color:black;border:none" );
+
+    QPixmap pixmapEllipse( ":/icon/Resources/edit.svg" );
+    QIcon ButtonIconEllipse( pixmapEllipse );
+    m_ui->m_ellipse->setIcon( ButtonIconEllipse );
+    m_ui->m_ellipse->setIconSize( QSize( 30, 30 ) );
+    m_ui->m_ellipse->setStyleSheet( "color:black;border:none" );
 
     QPixmap pixmapClose( ":/icon/Resources/select.svg" );
 	QIcon ButtonIconClose( pixmapClose );
@@ -292,6 +315,11 @@ void MainWindow::setColor( const QColor& color )
 	{
         currentRectangle->setBrush( QBrush( m_color ) );
     }
+
+    if ( currentEllipse != nullptr )
+    {
+        currentEllipse->setBrush( QBrush( m_color ) );
+    }
 	emit colorChanged( m_color );
 }
 
@@ -314,6 +342,20 @@ void MainWindow::setBorderWidth( const int& width )
 		}
 	}
 
+    if ( currentEllipse != nullptr )
+    {
+        if ( width == 0 )
+        {
+            currentEllipse->setPen( Qt::NoPen );
+        }
+
+        else
+        {
+            QPen pen( currentEllipse->pen().color(), width );
+            currentEllipse->setPen( pen );
+        }
+    }
+
 	emit borderWidthChanged( m_borderWidth );
 }
 
@@ -327,6 +369,13 @@ void MainWindow::setBorderColor( const QColor& color )
 		QPen pen( color, currentRectangle->pen().width() );
 		currentRectangle->setPen( pen );
 	}
+
+    if ( currentEllipse != nullptr )
+    {
+        QPen pen( color, currentEllipse->pen().width() );
+        currentEllipse->setPen( pen );
+    }
+
 
 	emit borderColorChanged( m_borderColor );
 }
@@ -361,7 +410,37 @@ void MainWindow::loadRectangle( Rectangle* rect )
 	else
 	{
 		m_borderWidth = currentRectangle->pen().width();
-	}
+    }
+}
+
+void MainWindow::newEllipse(Ellipse *rect)
+{
+    rect->setBrush( QBrush( m_color ) );
+
+    if ( m_borderWidth == 0 )
+    {
+        rect->setPen( Qt::NoPen );
+    }
+
+    else
+    {
+        rect->setPen( QPen( m_borderColor, m_borderWidth ) );
+    }
+}
+
+void MainWindow::loadEllipse(Ellipse *rect)
+{
+    m_color = rect->brush().color();
+
+    if ( rect->pen().style() == Qt::NoPen )
+    {
+        m_borderWidth = 0;
+    }
+
+    else
+    {
+        m_borderWidth = rect->pen().width();
+    }
 }
 
 void MainWindow::newLine( Line* line )
@@ -421,6 +500,12 @@ void MainWindow::selectNewItem( QGraphicsItem* item )
 				newRectangle( rect );
 				break;
 			}
+    case QGraphicsEllipseItem::Type:
+        {
+            Ellipse* rect = qgraphicsitem_cast<Ellipse*>( item );
+            newEllipse( rect );
+            break;
+        }
 
 		case QGraphicsPathItem::Type:
 			{
@@ -444,6 +529,13 @@ void MainWindow::selectItem( QGraphicsItem* item )
 				loadRectangle( rect );
 				break;
 			}
+
+    case QGraphicsEllipseItem::Type:
+        {
+            Ellipse* rect = qgraphicsitem_cast<Ellipse*>( item );
+            loadEllipse( rect );
+            break;
+        }
 
 		case QGraphicsPathItem::Type:
 			{
@@ -585,6 +677,20 @@ void MainWindow::on_m_square_clicked()
 {
 	m_ui->widget_line->hide();
 	m_ui->widget_rect->show();
+    m_ui->label_6->show();
+    m_ui->borderWidth_3->show();
+    m_ui->doubleSpinBox_2->show();
+    m_ui->label_7->show();
+}
+
+void MainWindow::on_m_ellipse_clicked()
+{
+    m_ui->widget_line->hide();
+    m_ui->widget_rect->show();
+    m_ui->label_6->hide();
+    m_ui->borderWidth_3->hide();
+    m_ui->doubleSpinBox_2->hide();
+    m_ui->label_7->hide();
 }
 
 void MainWindow::on_tabWidget_tabBarClicked( int index )
@@ -601,32 +707,22 @@ void MainWindow::on_tabWidget_tabCloseRequested( int index )
 	}
 }
 
-//void MainWindow::on_horizontalSlider_valueChanged(int value)
-//{
-//    qDebug () << value;
-//    m_ui->graphicsView->setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
-//    double scaleFactor = 1.04;
-//    if( value > 0 )
-//         m_ui->graphicsView->scale(scaleFactor,scaleFactor);
-//    else
-//    {
-//        m_ui->graphicsView->scale(1/scaleFactor,1/scaleFactor);
-//    }
-
-//}
-
-
-
 void MainWindow::on_doubleSpinBox_valueChanged(double value)
 {
-    currentRectangle->setOpacity( value );
-    workplaceScene->addItem(currentRectangle);
+    if ( currentRectangle != nullptr )
+    {
+        currentRectangle->setOpacity( value );
+        workplaceScene->addItem(currentRectangle);
+    }
 }
 
 void MainWindow::on_doubleSpinBox_2_valueChanged(double value)
 {
-    currentLine->setOpacity( value );
-    workplaceScene->addItem(currentLine);
+    if ( currentLine != nullptr )
+    {
+        currentLine->setOpacity( value );
+        workplaceScene->addItem(currentLine);
+    }
 }
 
 void MainWindow::on_borderWidth_3_valueChanged(int value)
@@ -643,6 +739,7 @@ void MainWindow::on_borderWidth_3_valueChanged(int value)
     {
         currentRectangle->setGraphicsEffect( NULL );
     }
+
 }
 
 void MainWindow::on_m_open_clicked()

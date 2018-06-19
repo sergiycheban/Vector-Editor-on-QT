@@ -1,19 +1,18 @@
 #include "ellipse.h"
 
-#include "rectangle.h"
 #include <QPainter>
 #include <QDebug>
 #include <QCursor>
 #include <QGraphicsScene>
 #include <QGraphicsSceneMouseEvent>
-#include <QGraphicsRectItem>
+#include <QGraphicsEllipseItem>
 #include <math.h>
 
 #include "dotsignal.h"
 #include "mainwindow.h"
+
 static const double Pi = 3.14159265358979323846264338327950288419717;
 static double TwoPi = 2.0 * Pi;
-
 
 static qreal normalizeAngle( qreal angle )
 {
@@ -30,23 +29,22 @@ static qreal normalizeAngle( qreal angle )
     return angle;
 }
 
-
 Ellipse::Ellipse( QObject* parent ) :
     QObject( parent ),
     m_cornerFlags( 0 ),
     m_actionFlags( ResizeState )
 {
     setAcceptHoverEvents( true );
-        setFlags( ItemIsSelectable | ItemSendsGeometryChanges );
+    setFlags( ItemIsSelectable | ItemSendsGeometryChanges );
 
-        for ( int i = 0; i < 8; i++ )
-        {
-            cornerGrabber[i] = new Dotsignal( this );
-        }
+    for ( int i = 0; i < 8; i++ )
+    {
+        cornerGrabber[i] = new Dotsignal( this );
+    }
 
-        setPositionGrabbers();
+    setPositionGrabbers();
+
 }
-
 
 Ellipse::~Ellipse()
 {
@@ -69,7 +67,7 @@ void Ellipse::setPreviousPosition( const QPointF previousPosition )
     }
 
     m_previousPosition = previousPosition;
-   // emit previousPositionChangedEllipse();
+    emit previousPositionChanged();
 }
 
 void Ellipse::setRect( qreal x, qreal y, qreal w, qreal h )
@@ -79,12 +77,7 @@ void Ellipse::setRect( qreal x, qreal y, qreal w, qreal h )
 
 void Ellipse::setRect( const QRectF& rect )
 {
-    QGraphicsRectItem::setRect( rect );
-}
-
-void Ellipse::Rosina( QString = "cate" )
-{
-
+    QGraphicsEllipseItem::setRect( rect );
 }
 
 void Ellipse::mouseMoveEvent( QGraphicsSceneMouseEvent* event )
@@ -139,7 +132,7 @@ void Ellipse::mouseMoveEvent( QGraphicsSceneMouseEvent* event )
                     auto dy = event->scenePos().y() - m_previousPosition.y();
                     moveBy( dx, dy );
                     setPreviousPosition( event->scenePos() );
-                    //emit signalMoveEllipse( this, dx, dy );
+                    emit signalMove( this, dx, dy );
                 }
 
                 break;
@@ -167,7 +160,7 @@ void Ellipse::mouseMoveEvent( QGraphicsSceneMouseEvent* event )
                     auto dy = event->scenePos().y() - m_previousPosition.y();
                     moveBy( dx, dy );
                     setPreviousPosition( event->scenePos() );
-                    //emit signalMoveEllipse( this, dx, dy );
+                    emit signalMove( this, dx, dy );
                 }
 
                 break;
@@ -183,7 +176,7 @@ void Ellipse::mousePressEvent( QGraphicsSceneMouseEvent* event )
     {
         m_leftMouseButtonPressed = true;
         setPreviousPosition( event->scenePos() );
-        //emit clickedEllipse( this );
+        emit clicked( this );
     }
 
     QGraphicsItem::mousePressEvent( event );
