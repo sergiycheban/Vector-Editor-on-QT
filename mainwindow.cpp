@@ -68,8 +68,7 @@ MainWindow::MainWindow( QWidget* parent ) :
     QObject::connect(newTabButton, SIGNAL(clicked()), this, SLOT(newTab()));
     newTabButton->setToolTip(tr("Add page"));
 
-//    m_ui->widget_line->hide();
-//    m_ui->widget_rect->hide();
+    m_ui->widget_line->hide();
 }
 
 
@@ -821,6 +820,28 @@ void MainWindow::on_m_open_clicked()
                     break;
                 }
 
+        case QGraphicsEllipseItem::Type:
+            {
+                Ellipse* ellipse = qgraphicsitem_cast<Ellipse*>( item );
+
+                if ( m_index == 0 )
+                {
+                    workplaceScene->addItem( ellipse );
+                }
+
+                if ( m_index == 1 )
+                {
+                    workplaceScene_2->addItem( ellipse );
+                }
+
+                if ( m_index == 2 )
+                {
+                    workplaceScene_3->addItem( ellipse );
+                }
+
+                break;
+            }
+
             default:
                 break;
         }
@@ -891,4 +912,20 @@ void MainWindow::on_m_question_clicked()
                        Qt::FramelessWindowHint);
     msgBox.setStyleSheet("QMessageBox { background-image: url(:/icon/Resources/Help.jpg);font-size: 12pt;}");
     msgBox.exec();
+
+    if( QMessageBox::Yes )
+    {
+        QMessageBox msgBox(QMessageBox::Information,
+                           "Information",
+                           "Еhis is a simple vector editor. With which "
+                           "you can make the most elementary drawings.\n"
+                           " \n"
+                           "Functional: \n"
+                           " - On the left side, all the existing shapes at the moment, on the right side of the shape option. \n"
+                           " - Ctrl + mouse scroll - scaling the scene. \n"
+                           " - Double-click on the figure changes the option of risize on the twirl. \n"
+                           " - You can work simultaneously with 3 tabs.",
+                           QMessageBox::Ok, this);
+        msgBox.exec();
+    }
 }

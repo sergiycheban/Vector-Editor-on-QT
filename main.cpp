@@ -7,7 +7,7 @@ int main(int argc, char *argv[])
 
 	QApplication a(argc, argv);
 
-    QPixmap pixmapClose(":/icon/Resources/animated-cat-image-0072.gif");
+    QPixmap pixmapClose(":/icon/Resources/cave-painting.svg");
     QPixmap newPixmap = pixmapClose.scaled(QSize(300,300),  Qt::KeepAspectRatio);
 
     QSplashScreen* splash = new QSplashScreen;
