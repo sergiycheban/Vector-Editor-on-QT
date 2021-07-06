@@ -26,38 +26,24 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    colorlabel.cpp \
     rectangle.cpp \
-    dotsignal.cpp \
     workplace.cpp \
     line.cpp \
     svssave.cpp \
     colorlabel.cpp \
     dotsignal.cpp \
-    line.cpp \
-    main.cpp \
-    mainwindow.cpp \
-    rectangle.cpp \
-    svssave.cpp \
-    workplace.cpp \
     diagramitem.cpp \
     ellipse.cpp
 
 HEADERS += \
         mainwindow.h \
     colorlabel.h \
-    rectangle.h \
     dotsignal.h \
     workplace.h \
-    line.h \
-    svssave.h \
-    colorlabel.h \
     dotsignal.h \
     line.h \
-    mainwindow.h \
     rectangle.h \
     svssave.h \
-    workplace.h \
     diagramitem.h \
     ellipse.h
 
